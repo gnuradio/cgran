@@ -1,0 +1,20 @@
+li a {
+    color: green;
+}
+
+body {
+    padding-left: 15px;
+}
+
+h1 a {
+    color: #FCA205;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 30px;
+}
+
+p {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+}
+
+

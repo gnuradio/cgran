@@ -1,0 +1,64 @@
+{% load render_table from django_tables2 %}
+{% load static %}
+
+
+
+<head>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'ootlist/style.css' %}" />
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a target="_blank" href="http://gnuradio.org/">GNU Radio</a></li>
+      <li><a target="_blank" href="http://libvolk.org/">VOLK</a></li>
+      <li><a target="_blank" href="https://github.com/gnuradio/pybombs">PyBOMBS</a></li>
+      <li><a href="{% url 'ootlist:submit' %}">Submit your OOT</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+<div class="row" style="padding: 20px 20px 20px 20px;">
+ 
+  <div class="col-sm-4" align="center"> <!-- remember, numbers should add to 12 -->
+    <img src="{% static 'ootlist/images/cgran_logo.png' %}" class="img-responsive">
+  </div>
+  
+  <div class="col-md-8" align="center"> 
+    <h3 style="color: #fd6b5c">The Comprehensive GNU Radio Archive Network</h3>
+    <h4 style="padding-top: 30px; color: #757575">
+    The Comprehensive GNU Radio Archive Network (CGRAN) is a free open source
+    repository for 3rd party GNU Radio applications a.k.a Out Of Tree Modules
+    that are not officially supported by the GNU Radio project.
+    </h4>
+  </div>
+  
+</div> 
+  
+
+
+
+<div class="container" align="center">     
+  {% render_table table %}
+</div>
+
+</body>
+
+<footer>
+<hr>
+<div align="center">
+  <p style="color: #757575">
+  &copy; 2017 Marc Lichtman<br>
+  This page is licensed under a <a href="http://creativecommons.org/licenses/by-nd/3.0/us/"> Creative Commons Attribution-NoDerivs 3.0 United States License</a>
+  </p>
+</div>
+</footer>
+
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+
+<body>
+
+<div class="container" style="padding: 20px 20px 20px 20px;">
+<h3>Submitting a GNU Radio Out of Tree (OOT) Module</h1>
+<p>To have your OOT show up in CGRAN, you don't actually submit it directly.
+CGRAN works by automatically parsing the gr-recipes and gr-etcetera PyBOMBS recipes.
+Having your OOT in the form of a PyBOMBS recipe will make it real quick for people
+to install and use it.  Use the following steps to add your OOT to gr-etcetera:
+<ol>
+  <li>Create MANIFEST.md in the root directory of your OOT <a href="https://raw.githubusercontent.com/osh/gr-eventstream/master/MANIFEST.md">(example manifest)</a></li>
+  <li>Create the PyBOMBS Recipe File (.lwr file) <a href="https://wiki.gnuradio.org/index.php/OutOfTreeModulesConfig">instructions at the bottom of this page</a></li>
+  <li>Add your .lwr file to <a href="https://github.com/gnuradio/gr-etcetera">gr-etcetera</a> in the form of a pull request, look at closed pull requests for examples</li>
+  <li>Once your pull request is merged in, and CGRAN does its daily update, your OOT should show up</li>
+</ol>
+
+<a href="{% url 'ootlist:index' %}">back</a>
+
+</div>
+</body>
+</html>
+

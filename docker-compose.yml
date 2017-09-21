@@ -1,0 +1,29 @@
+# mostly came from https://github.com/ruddra/docker-django
+version: '2'  
+services:  
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/src
+      - ./cgran/nginx-config:/etc/nginx/conf.d
+      - /ootlist/static:/static
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: web
+    command: bash -c "python manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && gunicorn -t 200 cgran.wsgi -b 0.0.0.0:8000"
+    depends_on:
+      - db
+    volumes:
+      - .:/src
+      - /ootlist/static:/static
+    expose:
+      - "8000"
+
+  db:
+    image: postgres:latest
+    container_name: db

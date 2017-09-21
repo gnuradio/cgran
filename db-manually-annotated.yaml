@@ -1,0 +1,348 @@
+- model: ootlist.outoftreemodule
+  pk: 1
+  fields: {name: gr-uhdgps, tags: 'uhd, gps', description: GR Blocks to assist in
+      GPS Data logging with UHD and a GPSDO, repo: 'https://github.com/osh/gr-uhdgps.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 2
+  fields: {name: gr-ieee802-15-4, tags: 'sdr, IEEE 802.15.4, ZigBee', description: An
+      IEEE 802.15.4 (ZigBee) Transceiver, repo: 'https://github.com/bastibl/gr-ieee802-15-4.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 3
+  fields: {name: gr-nmea, tags: 'sdr, gps, nmea', description: interface to NMEA and
+      GPSD sources, repo: 'https://github.com/ckuethe/gr-nmea.git', added_date: null,
+    status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 4
+  fields: {name: gnss-sdr, tags: 'sdr, gnss, gps, Galileo', description: An open source
+      global navigation satellite systems software defined receiver, repo: 'https://github.com/gnss-sdr/gnss-sdr',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 5
+  fields: {name: gr-drm, tags: 'sdr, digital radio, short wave', description: DRM/DRM+
+      transmitter, repo: 'https://github.com/kit-cel/gr-drm', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 6
+  fields: {name: gr-eventstream, tags: 'scheduler, streams, bursty', description: The
+      event stream scheduler, repo: 'https://github.com/osh/gr-eventstream.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 7
+  fields: {name: gr-osmosdr, tags: 'rtlsdr, bladerf, airspy, rfspace, hackrf, soapy,
+      sdrplay, uhd, osmocom', description: GNU Radio block for interfacing with various
+      radio hardware, repo: 'https://github.com/osmocom/gr-osmosdr', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 8
+  fields: {name: gr-radar, tags: 'radar, UHD', description: GNU Radio Radar Toolbox,
+    repo: 'https://github.com/kit-cel/gr-radar', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 9
+  fields: {name: gr-theano, tags: 'python, GPU, cuda', description: blocks leveraging
+      the theano library to run code in graphics cards, repo: 'https://github.com/osh/gr-theano.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 10
+  fields: {name: gr-benchmark, tags: 'performance, benchmark, simulation', description: a
+      performance measurement tool for GNU Radio, repo: 'https://github.com/osh/gr-benchmark.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 11
+  fields: {name: gr-pcap, tags: 'pcap, packet', description: PCAP recording and playback,
+    repo: 'https://github.com/osh/gr-pcap.git', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 12
+  fields: {name: gr-paint, tags: 'OFDM, Fun', description: An OFDM spectrum painter/transmitter,
+    repo: 'https://github.com/drmpeg/gr-paint', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 13
+  fields: {name: gr-mer, tags: 'MER, QAM, Measurements', description: An open source
+      implementation of QAM Modulation error measurements in GNU Radio., repo: 'https://github.com/git-artes/gr-mer',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 14
+  fields: {name: gr-lte, tags: 'LTE, synchronization, estimation, PBCH', description: LTE
+      downlink receiver blocks, repo: 'https://github.com/kit-cel/gr-lte', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 15
+  fields: {name: gr-ieee802-15-4, tags: 'IEEE 802.15.4, ZigBee, IoT', description: An
+      IEEE 802.15.4 (ZigBee) Transceiver, repo: 'https://github.com/bastibl/gr-ieee802-15-4.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 16
+  fields: {name: gr-ieee802-11, tags: 'IEEE 802.11, WiFi, OFDM', description: IEEE
+      802.11 a/g/p Transceiver, repo: 'https://github.com/bastibl/gr-ieee802-11.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 17
+  fields: {name: gr-microtelecom, tags: 'hardware, source', description: Microtelecoms
+      Perseus SDR source module, repo: 'https://github.com/amontefusco/gr-microtelecom',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 18
+  fields: {name: gr-pyqt, tags: 'gui, plotting, pyqt, pyqwt', description: Python
+      QT Plotters and Message Tools Repo (much functionality is built into gnuradio
+      now), repo: 'https://github.com/osh/gr-pyqt.git', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 19
+  fields: {name: gr-rds, tags: 'FM, RDS, TMC', description: FM RDS/TMC Transceiver,
+    repo: 'https://github.com/bastibl/gr-rds.git', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 20
+  fields: {name: gr-fosphor, tags: 'fft, gpu, opencl, opengl, visualization, osmocom',
+    description: GNU Radio block for RTSA-like spectrum visualization using OpenCL
+      and OpenGL acceleration, repo: 'https://github.com/osmocom/gr-fosphor', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 21
+  fields: {name: gr-nacl, tags: encryption, description: GNU Radio module for data
+      encryption using NaCl library, repo: 'https://github.com/stwunsch/gr-nacl',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 22
+  fields: {name: gr-dvbt2, tags: 'DVB, LDPC, BCH, PAPR, MISO, T2Lite', description: A
+      DVB-T2 transmitter., repo: 'https://github.com/drmpeg/gr-dvbt2', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 23
+  fields: {name: gr-dvbs2, tags: 'DVB, LDPC, BCH, 16APSK, 32APSK', description: A
+      DVB-S2 and DVB-S2X transmitter., repo: 'https://github.com/drmpeg/gr-dvbs2',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 24
+  fields: {name: gr-isdbt, tags: 'DTV, ISDB-T, OFDM, Viterbi', description: A complete
+      receiver for the digital TV standard ISDB-T, repo: 'https://github.com/git-artes/gr-isdbt',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 25
+  fields: {name: acarsdec, tags: ACARS, description: Aircraft Communications Addressing
+      and Reporting System (ACARS) SDR Decoder, repo: 'https://github.com/ckuethe/acarsdec.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 26
+  fields: {name: dump1090, tags: Mode S, description: Mode S decoder for RTLSDR devices,
+    repo: 'https://github.com/mutability/dump1090.git', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 28
+  fields: {name: gqrx, tags: 'sdr receiver, waveform analysis', description: Software
+      defined radio receiver powered by GNU Radio and Qt, repo: 'https://github.com/csete/gqrx.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 29
+  fields: {name: gr-acars2, tags: null, description: null, repo: 'https://github.com/antoinet/gr-acars2.git',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 30
+  fields: {name: gr-adsb, tags: null, description: null, repo: 'https://github.com/wnagele/gr-adsb.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 31
+  fields: {name: gr-air-modes, tags: 'Mode-S, ADS-B', description: Gnuradio Mode-S/ADS-B
+      radio, repo: 'https://github.com/bistromath/gr-air-modes.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 32
+  fields: {name: gr-ais, tags: null, description: null, repo: 'https://github.com/bistromath/gr-ais.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 33
+  fields: {name: gr-ax25, tags: 'HAM, AX.25', description: Some hamradio ax.25 routines
+      for gnuradio, repo: 'https://github.com/dl1ksv/gr-ax25.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 34
+  fields: {name: gr-baz, tags: null, description: adds new misc functionality blocks,
+    repo: 'https://github.com/balint256/gr-baz.git', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 35
+  fields: {name: gr-bluetooth, tags: bluetooth, description: A Bluetooth receiver
+      implementation for GNU Radio, repo: 'https://github.com/greatscottgadgets/gr-bluetooth.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 36
+  fields: {name: gr-burst, tags: null, description: null, repo: 'https://github.com/gr-vt/gr-burst.git',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 37
+  fields: {name: gr-cdma, tags: CDMA, description: A CDMA physical layer for Gnuradio,
+    repo: 'https://github.com/anastas/gr-cdma.git', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 39
+  fields: {name: gr-dect2, tags: null, description: null, repo: 'https://github.com/pavelyazev/gr-dect2',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 40
+  fields: {name: gr-display, tags: 'GUI, QT', description: Small qt based addon for
+      gnuradio, repo: 'https://github.com/dl1ksv/gr-display.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 41
+  fields: {name: gr-dsd, tags: null, description: null, repo: 'https://github.com/argilo/gr-dsd.git',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 42
+  fields: {name: gr-dvbt, tags: DVB-T, description: DVB-T implementation in gnuradio,
+    repo: 'https://github.com/BogdanDIA/gr-dvbt.git', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 43
+  fields: {name: gr-elster, tags: null, description: null, repo: 'https://github.com/argilo/gr-elster.git',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 44
+  fields: {name: gr-ettus, tags: Ettus, description: Out-of-tree GNU Radio Module
+      for Experimental Ettus Research Features, repo: 'https://github.com/EttusResearch/gr-ettus.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 45
+  fields: {name: gr-fcdproplus, tags: funcube, description: A gnuradio funcube dongle
+      pro+ source, repo: 'https://github.com/dl1ksv/gr-fcdproplus.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 46
+  fields: {name: gr-flarm, tags: null, description: null, repo: 'https://github.com/argilo/gr-flarm.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 47
+  fields: {name: gr-framers, tags: 'framer, deframer', description: A Framer and Deframer
+      Blocks for GNU Radio, repo: 'https://github.com/gr-vt/gr-framers.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 49
+  fields: {name: gr-gpweak supportict-doppler, tags: null, description: null, repo: 'https://github.com/wnagele/gr-gpweak
+      supportict-doppler.git', added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 50
+  fields: {name: gr-gsm, tags: GSM, description: Gnuradio blocks and tools for receiving
+      GSM transmissions, repo: 'https://github.com/ptrkrysik/gr-gsm.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 51
+  fields: {name: gr-ham, tags: null, description: null, repo: 'https://github.com/argilo/gr-ham.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 52
+  fields: {name: gr-hpsdr, tags: 'HPSDR, Hermes, Metis, Red Pitaya', description: 'A
+      gnuradio interface module for HPSDR Hermes / Metis, and Red Pitaya', repo: 'https://github.com/Tom-McDermott/gr-hpsdr.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 54
+  fields: {name: gr-iqbal, tags: null, description: null, repo: 'https://github.com/osmocom/gr-iqbal',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 55
+  fields: {name: gr-keyfob, tags: 'key fob, Hella', description: Transceiver for Hella
+      wireless car key fobs, repo: 'https://github.com/bastibl/gr-keyfob.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 56
+  fields: {name: gr-ldpc, tags: null, description: null, repo: 'https://github.com/manuts/gr-ldpc.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 57
+  fields: {name: gr-mac, tags: null, description: null, repo: 'https://github.com/jmalsbury/gr-mac.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 58
+  fields: {name: gr-mapper, tags: 'symbol, bit, mapping, demapping', description: Symbol
+      to Bit Mapping and Demapping Blocks for GNU Radio, repo: 'https://github.com/gr-vt/gr-mapper.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 59
+  fields: {name: gr-mediatools, tags: null, description: null, repo: 'https://github.com/osh/gr-mediatools.git',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 60
+  fields: {name: gr-message_tools, tags: 'message, debugging', description: Simple
+      message debugging tools (uint8_t primarily), repo: 'https://github.com/gr-vt/gr-message_tools.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 61
+  fields: {name: gr-mixalot, tags: null, description: null, repo: 'https://github.com/unsynchronized/gr-mixalot.git',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 62
+  fields: {name: gr-mtb, tags: null, description: null, repo: 'https://github.com/marcusmueller/measurement_toolbox.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 63
+  fields: {name: gr-multimon, tags: null, description: null, repo: 'https://github.com/ckuethe/gr-multimon.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 65
+  fields: {name: gr-packetradio, tags: null, description: null, repo: 'https://github.com/balint256/gr-packetradio.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 68
+  fields: {name: gr-psk31, tags: null, description: null, repo: 'https://github.com/tkuester/gr-psk31.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 70
+  fields: {name: gr-rccar2, tags: null, description: null, repo: 'https://github.com/peterfillmore/GR_RCCar.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 71
+  fields: {name: gr-rstt, tags: null, description: null, repo: 'https://github.com/bastibl/gr-rstt.git',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 72
+  fields: {name: gr-rtty, tags: null, description: null, repo: 'https://github.com/bistromath/gr-rtty.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 73
+  fields: {name: gr-smartnet, tags: null, description: null, repo: 'https://github.com/bistromath/gr-smartnet.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 74
+  fields: {name: gr-smithchart, tags: null, description: null, repo: 'https://github.com/mitul93/gr-smithchart.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 75
+  fields: {name: gr-specest, tags: 'spectral estimation, PSD', description: A module
+      adding spectral estimation routines to GNU Radio, repo: 'https://github.com/kit-cel/gr-specest.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 76
+  fields: {name: gr-streamsink, tags: null, description: null, repo: 'https://github.com/martinleolehner/gr-streamsink.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 77
+  fields: {name: gr-tagutils, tags: tags, description: Collection of blocks useful
+      for working with Stream Tags, repo: 'https://github.com/adamgann/gr-tagutils.git',
+    added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 78
+  fields: {name: gr-tutorial, tags: null, description: null, repo: 'https://github.com/gnuradio/gr-tutorial.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 79
+  fields: {name: gr-zmqblocks, tags: null, description: null, repo: 'https://github.com/iohannez/gr-zmqblocks.git',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 80
+  fields: {name: inspectrum, tags: 'PSD, offline', description: Offline radio signal
+      analyser, repo: 'https://github.com/miek/inspectrum.git', added_date: null,
+    status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 81
+  fields: {name: libperseus-sdr, tags: null, description: null, repo: 'https://github.com/amontefusco/libperseus-sdr',
+    added_date: null, status: weak support}
+- model: ootlist.outoftreemodule
+  pk: 82
+  fields: {name: rtl_433, tags: temperature sensor, description: Application using
+      librtlsdr to decode the temperature from a wireless temp. sensor (433.92MHz),
+    repo: 'https://github.com/merbanan/rtl_433.git', added_date: null, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 83
+  fields: {name: simple_radio_astronomy, tags: null, description: null, repo: 'https://github.com/patchvonbraun/simple_ra.git',
+    added_date: null, status: undetermined}
+- model: ootlist.outoftreemodule
+  pk: 84
+  fields: {name: gr-correctiq, tags: null, description: Blocks to remove IQ DC spike,
+    repo: 'https://github.com/ghostop14/gr-correctiq', added_date: 2017-09-14, status: maintained}
+- model: ootlist.outoftreemodule
+  pk: 85
+  fields: {name: gr-lpwan, tags: 'IEEE 802.15.4, LPWAN, LECIM, DSSS', description: Implementation
+      of the LECIM DSSS PHY layer of IEEE802.15.4, repo: 'https://github.com/kit-cel/gr-lpwan',
+    added_date: null, status: maintained}
