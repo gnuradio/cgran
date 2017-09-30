@@ -14,6 +14,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
+      <li><a href=".">CGRAN</a></li>
       <li><a target="_blank" href="http://gnuradio.org/">GNU Radio</a></li>
       <li><a target="_blank" href="http://libvolk.org/">VOLK</a></li>
       <li><a target="_blank" href="https://github.com/gnuradio/pybombs">PyBOMBS</a></li>
@@ -21,8 +22,6 @@
     </ul>
   </div>
 </nav>
-
-
 
 
 <div class="row" style="padding: 20px 20px 20px 20px;">
@@ -43,9 +42,16 @@
 </div> 
   
 
+<hr>
 
-
-<div class="container" align="center">     
+<div class="container" align="center">  
+  <div align="left">  
+    <form action="." method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Search" />
+    </form>
+  </div>
   {% render_table table %}
 </div>
 

@@ -11,6 +11,19 @@
 
 <body>
 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a href="javascript:history.back()">CGRAN</a></li>
+      <li><a target="_blank" href="http://gnuradio.org/">GNU Radio</a></li>
+      <li><a target="_blank" href="http://libvolk.org/">VOLK</a></li>
+      <li><a target="_blank" href="https://github.com/gnuradio/pybombs">PyBOMBS</a></li>
+      <li><a href="{% url 'ootlist:submit' %}">Submit your OOT</a></li>
+    </ul>
+  </div>
+</nav>
+
+
 <div class="container" style="padding: 20px 20px 20px 20px;">
 <h3>Submitting a GNU Radio Out of Tree (OOT) Module</h1>
 <p>To have your OOT show up in CGRAN, you don't actually submit it directly.

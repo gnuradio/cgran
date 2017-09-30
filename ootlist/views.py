@@ -8,26 +8,48 @@ from django.shortcuts import redirect
 
 from .models import Outoftreemodule
 from .tables import OutoftreemoduleTable
+from .forms import SearchForm
 
 def index(request):
-    table = OutoftreemoduleTable(Outoftreemodule.objects.all(), order_by=("-last_commit"))
-    RequestConfig(request, paginate={'per_page': 100}).configure(table)
-    return render(request, 'ootlist/index.html', {'table': table})
+    if request.method == 'POST': # if this is a POST request we need to process the form data
+        form = SearchForm(request.POST)
+        if form.is_valid(): # check whether it's valid
+            # search for oots with the provided string in either the name, tags, description, authors, or body_text
+            objects = (Outoftreemodule.objects.filter(name__icontains=form.cleaned_data['search_text']) | 
+                       Outoftreemodule.objects.filter(tags__icontains=form.cleaned_data['search_text']) |
+                       Outoftreemodule.objects.filter(description__icontains=form.cleaned_data['search_text']) |
+                       Outoftreemodule.objects.filter(author__icontains=form.cleaned_data['search_text']) |
+                       Outoftreemodule.objects.filter(body_text__icontains=form.cleaned_data['search_text']))
+            table = OutoftreemoduleTable(objects) # icontains is case-insensitive
+            RequestConfig(request, paginate={'per_page': 100}).configure(table)
+            return render(request, 'ootlist/index.html', {'table': table, 'form': form})
+    else:
+        form = SearchForm()
+        table = OutoftreemoduleTable(Outoftreemodule.objects.all(), order_by=("-last_commit"))
+        RequestConfig(request, paginate={'per_page': 100}).configure(table)
+        return render(request, 'ootlist/index.html', {'table': table, 'form': form})
 
+# submit your own OOT link
 def submit(request):
     return render(request, 'ootlist/submit.html')
-    
+
+# page that shows up when you click an OOT
+def oot_page(request, oot_id):
+    oot = Outoftreemodule.objects.get(pk=oot_id)
+    return render(request, 'ootlist/oot_page.html', {'oot': oot})
+
 def refresh(request):
     print "RUNING SCRAPER" # FIXME get this code pulled out into another filed called scraper.py
     import urllib
     import subprocess
     import os
     import shutil
-    import yaml
-    from cStringIO import StringIO
+    import yaml # yaml parser
+    from cStringIO import StringIO # allows strings to be converted to file object type things
     import re
-    import datetime
-
+    import datetime 
+    import mistune # markdown parser
+    
     # get around unicode error because of symbols in peoples names
     import sys
     reload(sys)
@@ -60,8 +82,10 @@ def refresh(request):
                     giturl = doc[indx+31:indx+indx2]
                     f = urllib.urlopen('https://raw.githubusercontent.com/' + giturl + '/master/MANIFEST.md')
                     manifest = f.read()
-                    indx3 = manifest.find('---')
+                    indx3 = manifest.find('---') # this bar separates header from "body_text"
                     f2 = StringIO(manifest[:indx3]) # annoying step, pyyaml wants a file object but i already have it in a string, so i wrap the string as a file object
+                    md = mistune.Markdown() # at some point they changed the way Markdown objects work
+                    body_text = md.parse(manifest[indx3+3:]) # grab everything after the bar, and run it through markdown parser                    
                     if indx3 != -1:
                         # parse yaml, creates dict, extract what we want
                         try:
@@ -86,16 +110,18 @@ def refresh(request):
                                 dates.append(datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))) # parse out year/month/day  
                             commit_date = max(dates) # most recent commit
 
-                            new_oots.append(Outoftreemodule(name = processed_yaml.get('title', 'None'),
+                            new_oots.append(Outoftreemodule(#name = processed_yaml.get('title', 'None'),
+                                                            name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
                                                             tags = ", ".join(processed_yaml.get('tags', 'None')), 
                                                             description = processed_yaml.get('brief', 'None'), 
                                                             repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
                                                             last_commit = commit_date,
-                                                            author = processed_yaml.get('author', 'None'),
-                                                            dependencies = processed_yaml.get('dependencies', 'None'),
-                                                            copyright_owner = processed_yaml.get('copyright_owner', 'None'),
+                                                            author = ", ".join(processed_yaml.get('author', 'None')),
+                                                            dependencies = ", ".join(processed_yaml.get('dependencies', 'None')),
+                                                            copyright_owner = ", ".join(processed_yaml.get('copyright_owner', 'None')),
                                                             icon = processed_yaml.get('icon', 'None'),
-                                                            website = processed_yaml.get('website', 'None')))                    
+                                                            website = processed_yaml.get('website', 'None'),
+                                                            body_text = body_text))                    
                             
                         except yaml.YAMLError, exc:
                             print giturl, "had error parsing MANIFEST yaml:", exc

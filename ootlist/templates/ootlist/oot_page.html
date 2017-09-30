@@ -1,0 +1,68 @@
+{% load static %}
+
+
+
+<head>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'ootlist/style.css' %}" />
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a href="javascript:history.back()">CGRAN</a></li>
+      <li><a target="_blank" href="http://gnuradio.org/">GNU Radio</a></li>
+      <li><a target="_blank" href="http://libvolk.org/">VOLK</a></li>
+      <li><a target="_blank" href="https://github.com/gnuradio/pybombs">PyBOMBS</a></li>
+      <li><a href="{% url 'ootlist:submit' %}">Submit your OOT</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container">   
+  <h1>  {{ oot.name }} </h1>
+  <div class="container" style="margin-left: 2em;">
+  <ul class="list-group">
+    <li class="list-group-item" style="border: none">
+      <b>Tags:</b>            {{ oot.tags }}</li>
+    <li class="list-group-item" style="border: none">
+      <b>Developer:</b>       {{ oot.author }}</li>
+    <li class="list-group-item" style="border: none">
+      <b>Dependencies:</b>    {{ oot.dependencies }}</li>
+    <li class="list-group-item" style="border: none">
+      <b>Repository:</b>      <a href="{{ oot.repo }}">{{ oot.repo }}</a></li>
+      
+    {% if oot.website != "None" %}
+    <li class="list-group-item" style="border: none">
+      <b>Website:</b>         <a href="{{ oot.website }}">{{ oot.website }}</a></li>
+    {% endif %}
+    
+    <li class="list-group-item" style="border: none">
+      <b>Copyright Owner:</b> {{ oot.copyright_owner }}</li>
+    <li class="list-group-item" style="border: none">
+      <b>Brief:</b>           {{ oot.description }}</li>
+  </ul>
+  </div>
+  
+  <h1>Module Info</h1>
+    <div class="container" style="margin-left: 2em;">   
+      {{ oot.body_text |safe }} 
+    </div>
+</div>
+
+</body>
+
+<footer>
+<hr>
+<div align="center">
+  <p style="color: #757575">
+footer
+  </p>
+</div>
+</footer>
+
+

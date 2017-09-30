@@ -14,5 +14,6 @@ class Outoftreemodule(models.Model):
     author = models.CharField(max_length=500, null=True, blank=True)
     dependencies = models.CharField(max_length=500, null=True, blank=True)
     copyright_owner = models.CharField(max_length=500, null=True, blank=True)
-    icon = models.CharField(max_length=500, null=True, blank=True)
+    icon = models.CharField(max_length=500, null=True, blank=True) # most urls provided by people dont even work anymore, so dont display the icon for now
     website = models.CharField(max_length=500, null=True, blank=True)
+    body_text = models.CharField(max_length=50000, null=True, blank=True)

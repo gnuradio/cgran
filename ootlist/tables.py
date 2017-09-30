@@ -4,13 +4,14 @@ from django_tables2.utils import A  # alias for Accessor
 from django_tables2 import SingleTableView
 
 class OutoftreemoduleTable(tables.Table):
-    name = tables.TemplateColumn('<a href="{{record.repo}}">{{record.name}}</a>')
+    #name = tables.TemplateColumn('<a href="{{record.repo}}">{{record.name}}</a>') # links to actual repo
+    name = tables.TemplateColumn('<a href="/{{record.id}}">{{record.name}}</a>') # links to oot_page
     tags = tables.Column(verbose_name='Categories')
     #status = tables.Column()
     description = tables.Column(orderable=False) # no reason to ever sort by description imo
     last_commit = tables.Column(verbose_name='Most Recent Commit')
     
-    '''
+    ''' this used the value of the status field to color the row, but it didn't look great
     def render_status(self, value, column):
         if value == 'maintained':
             column.attrs = {'td': {'bgcolor': 'lightgreen'}}
