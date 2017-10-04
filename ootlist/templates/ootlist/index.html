@@ -2,8 +2,9 @@
 {% load static %}
 
 
-
+<html>
 <head>
+  <title>CGRAN</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'ootlist/style.css' %}" />
 </head>
@@ -57,13 +58,8 @@
 
 </body>
 
-<footer>
-<hr>
-<div align="center">
-  <p style="color: #757575">
-footer
-  </p>
-</div>
-</footer>
+{% include 'ootlist/footer.html' %}
+
+</html>
 
 
