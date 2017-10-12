@@ -4,7 +4,7 @@ from django_tables2.utils import A  # alias for Accessor
 from django_tables2 import SingleTableView
 
 class OutoftreemoduleTable(tables.Table):
-    name = tables.TemplateColumn('<a href="/{{record.id}}">{{record.name}}</a>') # links to oot_page
+    name = tables.TemplateColumn('<a href="{% url \'ootlist:oot_page\' record.id %}">{{record.name}}</a>') # links to oot_page
     tags = tables.Column(verbose_name='Categories')
     description = tables.Column(orderable=False) # no reason to ever sort by description imo
     last_commit = tables.Column(verbose_name='Most Recent Commit')
