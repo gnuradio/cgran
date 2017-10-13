@@ -26,7 +26,7 @@ def index(request):
     else:
         form = SearchForm()
         table = OutoftreemoduleTable(Outoftreemodule.objects.all(), order_by=("-last_commit"))
-        RequestConfig(request, paginate={'per_page': 100}).configure(table)
+        RequestConfig(request, paginate={'per_page': 200}).configure(table)
         return render(request, 'ootlist/index.html', {'table': table, 'form': form})
 
 # submit your own OOT link
@@ -79,14 +79,16 @@ def refresh(request):
                 indx2 = doc[indx:].find('.git')
                 if indx2 != -1:
                     # fetch the raw MANIFEST.md of each recipe
-                    giturl = doc[indx+31:indx+indx2]
-                    f = urllib.urlopen('https://raw.githubusercontent.com/' + giturl + '/master/MANIFEST.md')
-                    manifest = f.read()
-                    indx3 = manifest.find('---') # this bar separates header from "body_text"
-                    f2 = StringIO(manifest[:indx3]) # annoying step, pyyaml wants a file object but i already have it in a string, so i wrap the string as a file object
-                    md = mistune.Markdown() # at some point they changed the way Markdown objects work
-                    body_text = md.parse(manifest[indx3+3:]) # grab everything after the bar, and run it through markdown parser                    
-                    if indx3 != -1:
+                    indx4 = doc[indx:indx+indx2].find('github.com/')
+                    if indx4 != -1:
+                        giturl = doc[indx+indx4+11:indx+indx2]
+                        f = urllib.urlopen('https://raw.githubusercontent.com/' + giturl + '/master/MANIFEST.md')
+                        manifest = f.read()
+                        indx3 = manifest.find('---') # this bar separates header from "body_text"
+                        f2 = StringIO(manifest[:indx3]) # annoying step, pyyaml wants a file object but i already have it in a string, so i wrap the string as a file object
+                        md = mistune.Markdown() # at some point they changed the way Markdown objects work
+                        body_text = md.parse(manifest[indx3+3:]) # grab everything after the bar, and run it through markdown parser                    
+                        #if indx3 != -1:
                         # parse yaml, creates dict, extract what we want
                         try:
                             processed_yaml = yaml.safe_load(f2) 
@@ -108,24 +110,25 @@ def refresh(request):
                             for updated in updateds:
                                 date = branch_page[updated+19:updated+29] # pull out date in year-mn-dy format
                                 dates.append(datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))) # parse out year/month/day  
-                            commit_date = max(dates) # most recent commit
-
-                            new_oots.append(Outoftreemodule(#name = processed_yaml.get('title', 'None'),
-                                                            name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
-                                                            tags = ", ".join(processed_yaml.get('tags', 'None')), 
-                                                            description = processed_yaml.get('brief', 'None'), 
-                                                            repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
-                                                            last_commit = commit_date,
-                                                            author = ", ".join(processed_yaml.get('author', 'None')),
-                                                            dependencies = ", ".join(processed_yaml.get('dependencies', 'None')),
-                                                            copyright_owner = ", ".join(processed_yaml.get('copyright_owner', 'None')),
-                                                            icon = processed_yaml.get('icon', 'None'),
-                                                            website = processed_yaml.get('website', 'None'),
-                                                            body_text = body_text))                    
-                            
+                            if dates: # if dates is empty its an indication the URL was broken
+                                commit_date = max(dates) # most recent commit
+                                new_oots.append(Outoftreemodule(#name = processed_yaml.get('title', 'None'),
+                                                                name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+                                                                tags = ", ".join(processed_yaml.get('tags', ['None'])), 
+                                                                description = processed_yaml.get('brief', 'None'), 
+                                                                repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
+                                                                last_commit = commit_date,
+                                                                author = ", ".join(processed_yaml.get('author', ['None'])),
+                                                                dependencies = ", ".join(processed_yaml.get('dependencies', ['None'])),
+                                                                copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
+                                                                icon = processed_yaml.get('icon', 'None'),
+                                                                website = processed_yaml.get('website', 'None'),
+                                                                body_text = body_text))                    
+                                
                         except yaml.YAMLError, exc:
                             print giturl, "had error parsing MANIFEST yaml:", exc
                             print ' '
+                        
 
     # clear table
     Outoftreemodule.objects.all().delete()
