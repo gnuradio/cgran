@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/gnuradio/cgran/master/ootlist/static/ootlist/images/cgran_logo.png" width="250"/>
+  <img src="https://raw.githubusercontent.com/gnuradio/cgran/master/ootlist/static/ootlist/images/cgran_logo_v2.png" width="250"/>
 </p>
 
 #### This is the Django web app for CGRAN.org (it's not live yet though)
