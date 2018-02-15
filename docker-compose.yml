@@ -15,13 +15,15 @@ services:
   web:
     build: .
     container_name: web
+    environment:
+      - PORT=8000
     depends_on:
       - db
     volumes:
       - .:/src
       - /ootlist/static:/static
     expose:
-      - "80"
+      - "8000"
 
   db:
     image: postgres:latest
