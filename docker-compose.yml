@@ -5,7 +5,7 @@ services:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "80:80"
+      - "8000:8000"
     volumes:
       - .:/src
       - ./cgran/nginx-config:/etc/nginx/conf.d
