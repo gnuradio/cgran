@@ -68,7 +68,6 @@ def refresh(request):
     gr_recipes = ['gr-recipes/' + recipe for recipe in os.listdir('gr-recipes')]
     gr_etcetera = ['gr-etcetera/' + recipe for recipe in os.listdir('gr-etcetera')]
     recipes = gr_recipes + gr_etcetera
-    i = 0
     new_oots = [] # will contain new objects, that then get saved all at once
     for recipe in recipes:
         if '.lwr' in recipe:
@@ -93,37 +92,41 @@ def refresh(request):
                         try:
                             processed_yaml = yaml.safe_load(f2) 
                             print giturl
-                            i += 1
+                            
+                            
                             #print processed_yaml.get('author', 'None')
                             #print processed_yaml.get('dependencies', 'None')
                             #print processed_yaml.get('copyright_owner', 'None')
                             #print processed_yaml.get('icon', 'None')
                             #print processed_yaml.get('website', 'None')
                             
-
-                            
-                            # fetch branches page of github to find the most recent commit
-                            f = urllib.urlopen('https://github.com/' + giturl + '/branches') 
-                            branch_page = f.read()   
-                            updateds = [m.start() for m in re.finditer('time-ago datetime=', branch_page)]
-                            dates = []
-                            for updated in updateds:
-                                date = branch_page[updated+19:updated+29] # pull out date in year-mn-dy format
-                                dates.append(datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))) # parse out year/month/day  
-                            if dates: # if dates is empty its an indication the URL was broken
-                                commit_date = max(dates) # most recent commit
-                                new_oots.append(Outoftreemodule(#name = processed_yaml.get('title', 'None'),
-                                                                name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
-                                                                tags = ", ".join(processed_yaml.get('tags', ['None'])), 
-                                                                description = processed_yaml.get('brief', 'None'), 
-                                                                repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
-                                                                last_commit = commit_date,
-                                                                author = ", ".join(processed_yaml.get('author', ['None'])),
-                                                                dependencies = ", ".join(processed_yaml.get('dependencies', ['None'])),
-                                                                copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
-                                                                icon = processed_yaml.get('icon', 'None'),
-                                                                website = processed_yaml.get('website', 'None'),
-                                                                body_text = body_text))                    
+                            # blacklist stuff that's not actually an OOT (edit blacklist.txt to add more)
+                            f = open('blacklist.txt', 'r')
+                            blacklist = f.read().split('\n')
+                            f.close()
+                            if giturl not in blacklist:
+                                # fetch branches page of github to find the most recent commit
+                                f = urllib.urlopen('https://github.com/' + giturl + '/branches') 
+                                branch_page = f.read()   
+                                updateds = [m.start() for m in re.finditer('time-ago datetime=', branch_page)]
+                                dates = []
+                                for updated in updateds:
+                                    date = branch_page[updated+19:updated+29] # pull out date in year-mn-dy format
+                                    dates.append(datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))) # parse out year/month/day  
+                                if dates: # if dates is empty its an indication the URL was broken
+                                    commit_date = max(dates) # most recent commit
+                                    new_oots.append(Outoftreemodule(#name = processed_yaml.get('title', 'None'),
+                                                                    name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+                                                                    tags = ", ".join(processed_yaml.get('tags', ['None'])), 
+                                                                    description = processed_yaml.get('brief', 'None'), 
+                                                                    repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
+                                                                    last_commit = commit_date,
+                                                                    author = ", ".join(processed_yaml.get('author', ['None'])),
+                                                                    dependencies = ", ".join(processed_yaml.get('dependencies', ['None'])),
+                                                                    copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
+                                                                    icon = processed_yaml.get('icon', 'None'),
+                                                                    website = processed_yaml.get('website', 'None'),
+                                                                    body_text = body_text))                    
                                 
                         except yaml.YAMLError, exc:
                             print giturl, "had error parsing MANIFEST yaml:", exc

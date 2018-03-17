@@ -1,0 +1,17 @@
+bokeh/bokeh
+EttusResearch/uhd
+apache/thrift
+dateutil/dateutil
+pothosware/SoapyRTLSDR
+jedisct1/libsodium
+myriadrf/LimeSuite
+tornadoweb/tornado
+jgaeddert/liquid-dsp
+gnuradio/gnuradio
+doxygen/doxygen
+mossmann/hackrf
+pothosware/SoapyHackRF
+airspy/host
+pothosware/SoapySDR
+Nuand/bladeRF
+szechyjs/mbelib
