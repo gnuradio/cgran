@@ -15,3 +15,7 @@ airspy/host
 pothosware/SoapySDR
 Nuand/bladeRF
 szechyjs/mbelib
+analogdevicesinc/libad9361-iio
+airspy/airspyhf
+merbanan/rtl_433
+miek/inspectrum
