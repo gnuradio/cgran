@@ -23,4 +23,4 @@
   2. Run python manage.py makemigrations to create migrations for those changes
   3. Run python manage.py migrate to apply those changes to the database.
 * save db to yaml file- `python manage.py dumpdata --format yaml ootlist.Outoftreemodule -o db.yaml`
-* load yaml file to db- `python manage.py loaddata db.yaml`
+* load yaml file to db- `python manage.py loaddata db.yaml` 
