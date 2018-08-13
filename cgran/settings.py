@@ -25,7 +25,7 @@ SECRET_KEY = 'b%*@1^@j$(nte)jol#x(w21zl66zr13jbler=^q1ir#z9&tl26'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['web'] # web is the name of the django docker container
 
 
 # Application definition

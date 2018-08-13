@@ -1,33 +1,8 @@
-FROM python:2.7-alpine3.6
-MAINTAINER 777arc <marcll@vt.edu>
-
+# mostly taken from https://docs.docker.com/compose/django/
+FROM python:3.6
 ENV PYTHONUNBUFFERED 1  
-
-
-RUN apk add --no-cache \
-    dumb-init \
-    git \ 
-    postgresql-dev \
-    gcc \
-    musl-dev
-COPY requirements.txt /config/requirements.txt
-
+RUN mkdir /config  
+ADD requirements.txt /config/  
 RUN pip install -r /config/requirements.txt
-
-COPY cgran/ /src/cgran
-COPY ootlist /src/ootlist
-COPY manage.py /src/
-COPY db-manually-annotated.yaml /src/
-COPY docker-entrypoint.sh /src/
-
-RUN \
-    adduser -S cgran &&\
-    chown cgran /src
-
-USER cgran
-
+RUN mkdir /src;  
 WORKDIR /src
-
-ENTRYPOINT [ "dumb-init" ]
-
-CMD [ "/src/docker-entrypoint.sh" ]

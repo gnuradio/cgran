@@ -19,3 +19,8 @@ analogdevicesinc/libad9361-iio
 airspy/airspyhf
 merbanan/rtl_433
 miek/inspectrum
+pothosware/SoapyUHD
+greatscottgadgets/libbtbb
+mutability/dump1090
+pothosware/SoapyRemote
+radioml/npuhd
