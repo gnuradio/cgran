@@ -24,3 +24,4 @@ greatscottgadgets/libbtbb
 mutability/dump1090
 pothosware/SoapyRemote
 radioml/npuhd
+pothosware/SoapyBladeRF
