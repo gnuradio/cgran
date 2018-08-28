@@ -25,3 +25,11 @@ mutability/dump1090
 pothosware/SoapyRemote
 radioml/npuhd
 pothosware/SoapyBladeRF
+airspy/airspyone_host
+ckuethe/acarsdec
+pothosware/SoapyAirspyHF
+pothosware/SoapyAirspy
+pothosware/SoapyMultiSDR
+signal11/hidapi
+kantooon/gqrx_fork
+iZsh/pocsag-mrt

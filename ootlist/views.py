@@ -129,9 +129,9 @@ def refresh(request):
                                                                         description = 'None', 
                                                                         repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
                                                                         last_commit = commit_date,
-                                                                        author = ['None'],
-                                                                        dependencies = ['None'],
-                                                                        copyright_owner = ['None'],
+                                                                        author = 'None',
+                                                                        dependencies = 'None',
+                                                                        copyright_owner = 'None',
                                                                         icon = 'None',
                                                                         website = 'None',
                                                                         body_text = body_text))                                                        
