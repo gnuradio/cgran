@@ -10,6 +10,8 @@ from .models import Outoftreemodule
 from .tables import OutoftreemoduleTable
 from .forms import SearchForm
 
+from django.utils.dateparse import parse_datetime
+
 def index(request):
     if request.method == 'POST': # if this is a POST request we need to process the form data
         form = SearchForm(request.POST)
@@ -75,12 +77,14 @@ def refresh(request):
             doc = open(recipe, 'r').read()
             indx = doc.find('source: ')
             if indx != -1:
-                indx2 = doc[indx:].find('.git')
+                indx2 = doc[indx:].find('\n')
                 if indx2 != -1:
                     # fetch the raw MANIFEST.md of each recipe
-                    indx4 = doc[indx:indx+indx2].find('github.com/')
+                    indx4 = doc[indx:indx+indx2].find('github.com/') # right now cgran only works with OOTs in github =(
                     if indx4 != -1:
                         giturl = doc[indx+indx4+11:indx+indx2]
+                        giturl = giturl.replace('.git','') # remove the .git that most of them have at the end
+                        giturl = giturl.replace('/releases/download/v2.6.1/protobuf-2.6.1.tar.gz','') # the protobufs recipe is a weird one
                         try: # a good chunk of OOTs dont have this file
                             f = urllib.request.urlopen('https://raw.githubusercontent.com/' + giturl + '/master/MANIFEST.md') 
                             manifest = f.read().decode('utf-8') # this converts it from a byte object to a python string   
@@ -94,7 +98,7 @@ def refresh(request):
                         # parse yaml, creates dict, extract what we want
                         try:
                             processed_yaml = yaml.safe_load(f2) 
-                            print(giturl)
+                            #print(giturl)
                             
                             # blacklist stuff that's not actually an OOT (edit blacklist.txt to add more)
                             f = open('blacklist.txt', 'r')
@@ -109,11 +113,11 @@ def refresh(request):
                                 for updated in updateds:
                                     date = branch_page[updated+19:updated+29] # pull out date in year-mn-dy format
                                     dates.append(datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))) # parse out year/month/day  
-                                if dates: # if dates is empty its an indication the URL was broken
+                                if dates: # if dates is empty its an indication the URL was broken so the OOT doesn't get added to the list
                                     commit_date = max(dates) # most recent commit
                                     if processed_yaml: # if the MANIFEST file existed
                                         new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
-                                                                        tags = ", ".join(processed_yaml['tags']), 
+                                                                        tags = ", ".join(processed_yaml.get('tags',['None'])), 
                                                                         description = processed_yaml.get('brief', 'None'), 
                                                                         repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
                                                                         last_commit = commit_date,
@@ -135,12 +139,46 @@ def refresh(request):
                                                                         icon = 'None',
                                                                         website = 'None',
                                                                         body_text = body_text))                                                        
-                                
+                                else:
+                                    print('error- recipe ' + recipe + ' had a broken URL')
+                                    
                         except yaml.YAMLError:
                             print(giturl, "had error parsing MANIFEST yaml")
-                            print(' ')
-                        
+                        except urllib.error.HTTPError:
+                            print('error opening up the branches page of recipe: ' + recipe)
 
+                    else:
+                        print('*** Skipping recipe' + recipe + ' because its not github based')    
+                else: 
+                    print('error- recipe' + recipe + ' had no new line at the end of the source field')    
+            else: 
+                print('error- recipe' + recipe + ' had no source: field')    
+                        
+    # Go through and manually add a bunch of OOTs that do not use github
+    new_oots.append(Outoftreemodule(name = 'gr-iqbal'.replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+                                    tags = ", ".join(['iq imbalance','rx','osmocom']), 
+                                    description = 'GNU Radio block to correct IQ imbalance in quadrature receivers', 
+                                    repo = 'git://git.osmocom.org/gr-iqbal', 
+                                    last_commit = parse_datetime('2015-11-21 11:47:58'),
+                                    author = 'Sylvain Munaut <tnt@246tNt.com>',
+                                    dependencies = 'None',
+                                    copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
+                                    icon = 'http://people.osmocom.org/~tnt/stuff/iqbal-icon.png',
+                                    website = 'None',
+                                    body_text = ' '))      
+    
+    new_oots.append(Outoftreemodule(name = 'gr-fosphor'.replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+                                    tags = ", ".join(['fft','gpu','opencl','opengl']), 
+                                    description = 'GNU Radio block for RTSA-like spectrum visualization using OpenCL and OpenGL acceleration', 
+                                    repo = 'git://git.osmocom.org/gr-fosphor', 
+                                    last_commit = parse_datetime('2016-05-22 11:47:58'),
+                                    author = 'Sylvain Munaut <tnt@246tNt.com>',
+                                    dependencies = 'None',
+                                    copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
+                                    icon = 'http://people.osmocom.org/~tnt/stuff/fosphor-icon.png',
+                                    website = 'None',
+                                    body_text = ' '))  
+                                        
     # clear table
     Outoftreemodule.objects.all().delete()
     # all the new objects to db

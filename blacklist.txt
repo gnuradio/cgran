@@ -33,3 +33,7 @@ pothosware/SoapyMultiSDR
 signal11/hidapi
 kantooon/gqrx_fork
 iZsh/pocsag-mrt
+google/protobuf
+glfw/glfw
+amontefusco/libperseus-sdr
+analogdevicesinc/libiio
