@@ -17,3 +17,7 @@ class Outoftreemodule(models.Model):
     icon = models.CharField(max_length=500, null=True, blank=True) # most urls provided by people dont even work anymore, so dont display the icon for now
     website = models.CharField(max_length=500, null=True, blank=True)
     body_text = models.CharField(max_length=50000, null=True, blank=True)
+    
+class Packageversion(models.Model):
+    os_name = models.CharField(max_length=500)
+    gr_version_string = models.CharField(max_length=500)

@@ -14,6 +14,20 @@
     float: none !important;
     }
 
+.table-xtra-condensed > thead > tr > th,
+.table-xtra-condensed > tbody > tr > th,
+.table-xtra-condensed > tfoot > tr > th,
+.table-xtra-condensed > thead > tr > td,
+.table-xtra-condensed > tbody > tr > td,
+.table-xtra-condensed > tfoot > tr > td {
+  padding: 2px;
+}
+
+.table-xtra-condensed{
+  font-size: 12px;
+  color: #757575;
+}
+
 </style>
 </head>
 
@@ -43,8 +57,35 @@
     <h4 style="padding-top: 30px; color: #757575">
     The Comprehensive GNU Radio Archive Network (CGRAN) is a free open source
     repository for 3rd party GNU Radio applications (a.k.a Out Of Tree Modules)
-    that are not officially supported by the GNU Radio project.
+    that are not officially supported by the GNU Radio project.<br><br>
+    GNU Radio Packaging Legend:
     </h4>
+
+    <div class="col-md-3">
+    </div>
+    
+    <div class="col-md-6">
+    <table class="table table-striped table-xtra-condensed text-center">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Operating System</th>
+          <th scope="col" class="text-nowrap text-center"><b>Packaged GNU Radio Version</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for x in package_versions %}
+          <tr>
+            <td>{{x.os_name}}</td>
+            <td>{{x.gr_version_string}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    
+    <div class="col-md-3">
+    </div>
+    
   </div>
   
 </div> 

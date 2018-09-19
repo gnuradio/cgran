@@ -7,12 +7,14 @@ from django_tables2 import RequestConfig
 from django.shortcuts import redirect
 
 from .models import Outoftreemodule
+from .models import Packageversion
 from .tables import OutoftreemoduleTable
 from .forms import SearchForm
 
 from django.utils.dateparse import parse_datetime
 
 def index(request):
+    package_versions = Packageversion.objects.all()
     if request.method == 'POST': # if this is a POST request we need to process the form data
         form = SearchForm(request.POST)
         if form.is_valid(): # check whether it's valid
@@ -22,14 +24,13 @@ def index(request):
                        Outoftreemodule.objects.filter(description__icontains=form.cleaned_data['search_text']) |
                        Outoftreemodule.objects.filter(author__icontains=form.cleaned_data['search_text']) |
                        Outoftreemodule.objects.filter(body_text__icontains=form.cleaned_data['search_text']))
-            table = OutoftreemoduleTable(objects) # icontains is case-insensitive
-            RequestConfig(request, paginate={'per_page': 100}).configure(table)
-            return render(request, 'ootlist/index.html', {'table': table, 'form': form})
-    else:
-        form = SearchForm()
-        table = OutoftreemoduleTable(Outoftreemodule.objects.all(), order_by=("-last_commit"))
-        RequestConfig(request, paginate={'per_page': 200}).configure(table)
-        return render(request, 'ootlist/index.html', {'table': table, 'form': form})
+            table = OutoftreemoduleTable(objects, order_by=("-last_commit")) # icontains is case-insensitive
+            RequestConfig(request, paginate={'per_page': 200}).configure(table)
+            return render(request, 'ootlist/index.html', {'table': table, 'form': form, 'package_versions': package_versions})
+    form = SearchForm()
+    table = OutoftreemoduleTable(Outoftreemodule.objects.all(), order_by=("-last_commit"))
+    RequestConfig(request, paginate={'per_page': 200}).configure(table)
+    return render(request, 'ootlist/index.html', {'table': table, 'form': form, 'package_versions': package_versions})
 
 # submit your own OOT link
 def submit(request):
@@ -56,6 +57,21 @@ def refresh(request):
     #import sys
     #reload(sys)
     #sys.setdefaultencoding('utf-8')
+
+    # pull versions of gnuradio in ubuntu packages
+    Packageversion.objects.all().delete() # clear out the table
+    ubuntu14 = 'https://packages.ubuntu.com/trusty/gnuradio'
+    ubuntu16 = 'https://packages.ubuntu.com/xenial/gnuradio'
+    ubuntu17 = 'https://packages.ubuntu.com/artful/gnuradio'
+    ubuntu18 = 'https://packages.ubuntu.com/bionic/gnuradio'
+    ubuntus = [(ubuntu14, 'Ubuntu-14'), (ubuntu16, 'Ubuntu-16'), (ubuntu17, 'Ubuntu-17'), (ubuntu18, 'Ubuntu-18')]
+    for ubuntu in ubuntus:
+        response = urllib.request.urlopen(ubuntu[0])
+        html = response.read().decode('utf-8')
+        indx = html.find('Package: gnuradio')
+        indx2 = html[indx:].find('-')
+        new_packageversion = Packageversion(os_name = ubuntu[1], gr_version_string = html[indx+19:indx+indx2])
+        new_packageversion.save() # add to db
 
     def git(*args):
         return subprocess.check_call(['git'] + list(args))
