@@ -1,167 +1,166 @@
-gr-recipes/bokeh.lwr
-gr-recipes/uhd.lwr
+gr-recipes/airspy.lwr
+gr-recipes/airspyhf.lwr
+gr-recipes/alsa.lwr
 gr-recipes/apache-thrift.lwr
+gr-recipes/armadillo.lwr
+gr-recipes/atk.lwr
+gr-recipes/bison.lwr
+gr-recipes/bladeRF.lwr
+gr-recipes/blas.lwr
+gr-recipes/bokeh.lwr
+gr-recipes/boost.lwr
+gr-recipes/cairo.lwr
+gr-recipes/cheetah.lwr
+gr-recipes/cmake3.lwr
+gr-recipes/cppunit.lwr
+gr-recipes/curl.lwr
 gr-recipes/dateutil.lwr
-pothosware/SoapyRTLSDR
-jedisct1/libsodium
-myriadrf/LimeSuite
-tornadoweb/tornado
-jgaeddert/liquid-dsp
-gnuradio/gnuradio
-doxygen/doxygen
-mossmann/hackrf
-pothosware/SoapyHackRF
-airspy/host
-pothosware/SoapySDR
-Nuand/bladeRF
-szechyjs/mbelib
-analogdevicesinc/libad9361-iio
-airspy/airspyhf
-merbanan/rtl_433
-miek/inspectrum
-pothosware/SoapyUHD
-greatscottgadgets/libbtbb
-mutability/dump1090
-pothosware/SoapyRemote
-radioml/npuhd
-pothosware/SoapyBladeRF
-airspy/airspyone_host
-ckuethe/acarsdec
-pothosware/SoapyAirspyHF
-pothosware/SoapyAirspy
-pothosware/SoapyMultiSDR
-signal11/hidapi
-kantooon/gqrx_fork
-iZsh/pocsag-mrt
-google/protobuf
-glfw/glfw
-amontefusco/libperseus-sdr
-analogdevicesinc/libiio
-
-web      | *** Skipping recipegr-recipes/libxslt.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pyqt5.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libtool.lwr because its not github based
-web      | error- recipegr-recipes/six.lwr had no source: field
-web      | *** Skipping recipegr-recipes/libbzip.lwr because its not github based
-web      | *** Skipping recipegr-recipes/lapack.lwr because its not github based
-web      | error- recipegr-recipes/subversion.lwr had no source: field
-web      | *** Skipping recipegr-recipes/swig.lwr because its not github based
-web      | *** Skipping recipegr-recipes/mpc.lwr because its not github based
-web      | *** Skipping recipegr-recipes/liblog4cpp.lwr because its not github based
-web      | error- recipegr-recipes/python.lwr had no source: field
-web      | error- recipegr-recipes/libjpeg.lwr had no source: field
-web      | error- recipegr-recipes/libav.lwr had no source: field
-web      | *** Skipping recipegr-recipes/wireshark.lwr because its not github based
-web      | *** Skipping recipegr-recipes/freetype.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libitpp.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libpcap.lwr because its not github based
-web      | *** Skipping recipegr-recipes/wxpython.lwr because its not github based
-web      | error- recipegr-recipes/networkx.lwr had no source: field
-web      | error- recipegr-recipes/mako.lwr had no source: field
-web      | error- recipegr-recipes/pygraphviz.lwr had no source: field
-web      | *** Skipping recipegr-recipes/fftw.lwr because its not github based
-web      | *** Skipping recipegr-recipes/openlte.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libpng.lwr because its not github based
-web      | error- recipegr-recipes/curl.lwr had no source: field
-web      | error- recipegr-recipes/pulseaudio.lwr had no source: field
-web      | *** Skipping recipegr-recipes/osmo-sdr.lwr because its not github based
-web      | *** Skipping recipegr-recipes/qwt5.lwr because its not github based
-web      | error- recipegr-recipes/faac.lwr had no source: field
-web      | *** Skipping recipegr-recipes/rtl-sdr.lwr because its not github based
-web      | error- recipegr-recipes/matio.lwr had no source: field
-web      | *** Skipping recipegr-recipes/gobject-introspection.lwr because its not github based
-web      | error- recipegr-recipes/pybitarray.lwr had no source: field
-web      | *** Skipping recipegr-recipes/gfortran.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libosmocore.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gtest.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gtk2.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gflags.lwr because its not github based
-web      | error- recipegr-recipes/libtiff.lwr had no source: field
-web      | *** Skipping recipegr-recipes/gsl.lwr because its not github based
-web      | error- recipegr-recipes/ssl.lwr had no source: field
-web      | *** Skipping recipegr-recipes/osmo-tetra.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gr-fosphor.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pyqwt5.lwr because its not github based
-web      | *** Skipping recipegr-recipes/make.lwr because its not github based
-web      | *** Skipping recipegr-recipes/lxml.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libosmo-dsp.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pyyaml.lwr because its not github based
-web      | *** Skipping recipegr-recipes/osmo-fl2k.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pygtk.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gr-osmosdr.lwr because its not github based
-web      | *** Skipping recipegr-recipes/faad.lwr because its not github based
-web      | error- recipegr-recipes/qwtplot3d.lwr had no source: field
-web      | *** Skipping recipegr-recipes/niusrprio.lwr because its not github based
-web      | *** Skipping recipegr-recipes/setuptools.lwr because its not github based
-web      | error- recipegr-recipes/wget.lwr had no source: field
-web      | error- recipegr-recipes/libudev.lwr had no source: field
-web      | *** Skipping recipegr-recipes/cairo.lwr because its not github based
-web      | error- recipegr-recipes/gcc.lwr had no source: field
-web      | *** Skipping recipegr-recipes/pygobject.lwr because its not github based
-web      | *** Skipping recipegr-recipes/glib.lwr because its not github based
-web      | error- recipegr-recipes/x11.lwr had no source: field
-web      | *** Skipping recipegr-recipes/pkg-config.lwr because its not github based
-web      | *** Skipping recipegr-recipes/qt4.lwr because its not github based
-web      | *** Skipping recipegr-recipes/boost.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libxml.lwr because its not github based
-web      | error- recipegr-recipes/gnuradio-stable.lwr had no source: field
-web      | *** Skipping recipegr-recipes/libtalloc-dev.lwr because its not github based
-web      | error- recipegr-recipes/libshout.lwr had no source: field
-web      | *** Skipping recipegr-recipes/ffi.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pyqt4.lwr because its not github based
-web      | error- recipegr-recipes/twisted.lwr had no source: field
-web      | *** Skipping recipegr-recipes/libpolarssl.lwr because its not github based
-web      | *** Skipping recipegr-recipes/armadillo.lwr because its not github based
-web      | error- recipegr-recipes/libmp3lame.lwr had no source: field
-web      | error- recipegr-recipes/python-zmq.lwr had no source: field
-web      | *** Skipping recipegr-recipes/numpy.lwr because its not github based
-web      | *** Skipping recipegr-recipes/qwt6.lwr because its not github based
-web      | *** Skipping recipegr-recipes/sip.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gr-iqbal.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gr-op25.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libusb.lwr because its not github based
-web      | *** Skipping recipegr-recipes/libsndfile.lwr because its not github based
-web      | *** Skipping recipegr-recipes/zeromq.lwr because its not github based
-web      | *** Skipping recipegr-recipes/glog.lwr because its not github based
-web      | *** Skipping recipegr-recipes/atk.lwr because its not github based
-web      | error- recipegr-recipes/qt5.lwr had no source: field
-web      | *** Skipping recipegr-recipes/scipy.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pysstv.lwr because its not github based
-web      | error- recipegr-recipes/sqlite.lwr had no source: field
-web      | error- recipegr-recipes/cheetah.lwr had no source: field
-web      | error- recipegr-recipes/python-tk.lwr had no source: field
-web      | error- recipegr-recipes/pyqt4-dev-tools.lwr had no source: field
-web      | error- recipegr-recipes/gnutls.lwr had no source: field
-web      | *** Skipping recipegr-recipes/expat.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gdk-pixbuf.lwr because its not github based
-web      | error- recipegr-recipes/python-matplotlib.lwr had no source: field
-web      | *** Skipping recipegr-recipes/cmake3.lwr because its not github based
-web      | *** Skipping recipegr-recipes/cppunit.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pycairo.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pixman.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pango.lwr because its not github based
-web      | error- recipegr-recipes/perl.lwr had no source: field
-web      | *** Skipping recipegr-recipes/mpfr.lwr because its not github based
-web      | *** Skipping recipegr-recipes/bison.lwr because its not github based
-web      | error- recipegr-recipes/blas.lwr had no source: field
-web      | error- recipegr-recipes/mcpp.lwr had no source: field
-web      | *** Skipping recipegr-recipes/gmp.lwr because its not github based
-web      | *** Skipping recipegr-recipes/gperftools.lwr because its not github based
-web      | *** Skipping recipegr-recipes/pcsclite.lwr because its not github based
-web      | error- recipegr-recipes/libevent.lwr had no source: field
-web      | *** Skipping recipegr-recipes/flex.lwr because its not github based
-web      | *** Skipping recipegr-recipes/fontconfig.lwr because its not github based
-web      | *** Skipping recipegr-recipes/alsa.lwr because its not github based
-web      | error- recipegr-recipes/gnuradio-default.lwr had no source: field
-web      | error- recipegr-etcetera/python-scapy.lwr had no source: field
-web      | error- recipegr-etcetera/aprutil.lwr had no source: field
-web      | error- recipegr-etcetera/libjsoncpp.lwr had no source: field
-web      | error- recipegr-etcetera/libconfig.lwr had no source: field
-web      | error opening up the branches page of recipe: gr-etcetera/gr-binviz.lwr
-web      | *** Skipping recipegr-etcetera/airprobe.lwr because its not github based
-web      | error- recipegr-etcetera/libboost-random.lwr had no source: field
-web      | *** Skipping recipegr-etcetera/ice.lwr because its not github based
-web      | error- recipegr-etcetera/apr.lwr had no source: field
-web      | error opening up the branches page of recipe: gr-etcetera/pyconstruct.lwr
-web      | *** Skipping recipegr-etcetera/db48.lwr because its not github based
-
+gr-recipes/doxygen.lwr
+gr-recipes/expat.lwr
+gr-recipes/faac.lwr
+gr-recipes/faad.lwr
+gr-recipes/ffi.lwr
+gr-recipes/fftw.lwr
+gr-recipes/flex.lwr
+gr-recipes/fontconfig.lwr
+gr-recipes/freetype.lwr
+gr-recipes/gcc.lwr
+gr-recipes/gdk-pixbuf.lwr
+gr-recipes/gflags.lwr
+gr-recipes/gfortran.lwr
+gr-recipes/glfw3.lwr
+gr-recipes/glib.lwr
+gr-recipes/glog.lwr
+gr-recipes/gmp.lwr
+gr-recipes/gnss-sdr.lwr
+gr-recipes/gnuradio-default.lwr
+gr-recipes/gnuradio-stable.lwr
+gr-recipes/gnuradio.lwr
+gr-recipes/gnuradio37.lwr
+gr-recipes/gnutls.lwr
+gr-recipes/gobject-introspection.lwr
+gr-recipes/gperftools.lwr
+gr-recipes/gqrx.lwr
+gr-recipes/gsl.lwr
+gr-recipes/gtest.lwr
+gr-recipes/gtk2.lwr
+gr-recipes/hackrf.lwr
+gr-recipes/lapack.lwr
+gr-recipes/libad9361.lwr
+gr-recipes/libav.lwr
+gr-recipes/libbtbb.lwr
+gr-recipes/libbzip.lwr
+gr-recipes/libevent.lwr
+gr-recipes/libhidapi.lwr
+gr-recipes/libiio.lwr
+gr-recipes/libitpp.lwr
+gr-recipes/libjpeg.lwr
+gr-recipes/gr-recipes/liblog4cpp.lwr
+gr-recipes/libmp3lame.lwr
+gr-recipes/libosmo-dsp.lwr
+gr-recipes/libosmocore.lwr
+gr-recipes/libpcap.lwr
+gr-recipes/libperseus-sdr.lwr
+gr-recipes/libpng.lwr
+gr-recipes/libpolarssl.lwr
+gr-recipes/libshout.lwr
+gr-recipes/libsndfile.lwr
+gr-recipes/libsodium.lwr
+gr-recipes/libtalloc-dev.lwr
+gr-recipes/libtiff.lwr
+gr-recipes/libtool.lwr
+gr-recipes/libudev.lwr
+gr-recipes/libusb.lwr
+gr-recipes/libxml.lwr
+gr-recipes/libxslt.lwr
+gr-recipes/limesuite.lwr
+gr-recipes/lxml.lwr
+gr-recipes/make.lwr
+gr-recipes/mako.lwr
+gr-recipes/matio.lwr
+gr-recipes/mbelib.lwr
+gr-recipes/mcpp.lwr
+gr-recipes/mpc.lwr
+gr-recipes/mpfr.lwr
+gr-recipes/networkx.lwr
+gr-recipes/niusrprio.lwr
+gr-recipes/numpy.lwr
+gr-recipes/openlte.lwr
+gr-recipes/osmo-fl2k.lwr
+gr-recipes/osmo-sdr.lwr
+gr-recipes/osmo-tetra.lwr
+gr-recipes/pango.lwr
+gr-recipes/pcsclite.lwr
+gr-recipes/perl.lwr
+gr-recipes/pixman.lwr
+gr-recipes/pkg-config.lwr
+gr-recipes/pocsag-mrt.lwr
+gr-recipes/protobuf.lwr
+gr-recipes/pulseaudio.lwr
+gr-recipes/pybitarray.lwr
+gr-recipes/pycairo.lwr
+gr-recipes/pygobject.lwr
+gr-recipes/pygraphviz.lwr
+gr-recipes/pygtk.lwr
+gr-recipes/pyqt4-dev-tools.lwr
+gr-recipes/pyqt4.lwr
+gr-recipes/pyqt5.lwr
+gr-recipes/pyqwt5.lwr
+gr-recipes/pysstv.lwr
+gr-recipes/python-matplotlib.lwr
+gr-recipes/python-tk.lwr
+gr-recipes/python-zmq.lwr
+gr-recipes/python.lwr
+gr-recipes/pyyaml.lwr
+gr-recipes/qt4.lwr
+gr-recipes/qt5.lwr
+gr-recipes/qwt5.lwr
+gr-recipes/qwt6.lwr
+gr-recipes/qwtplot3d.lwr
+gr-recipes/rtl-sdr.lwr
+gr-recipes/scipy.lwr
+gr-recipes/setuptools.lwr
+gr-recipes/sip.lwr
+gr-recipes/six.lwr
+gr-recipes/soapyairspy.lwr
+gr-recipes/soapyairspyhf.lwr
+gr-recipes/soapybladerf.lwr
+gr-recipes/soapyhackrf.lwr
+gr-recipes/soapymultisdr.lwr
+gr-recipes/soapyremote.lwr
+gr-recipes/soapyrtlsdr.lwr
+gr-recipes/soapysdr.lwr
+gr-recipes/soapyuhd.lwr
+gr-recipes/sqlite.lwr
+gr-recipes/ssl.lwr
+gr-recipes/subversion.lwr
+gr-recipes/swig.lwr
+gr-recipes/tornado.lwr
+gr-recipes/twisted.lwr
+gr-recipes/uhd.lwr
+gr-recipes/wget.lwr
+gr-recipes/wireshark.lwr
+gr-recipes/wxpython.lwr
+gr-recipes/x11.lwr
+gr-recipes/zeromq.lwr
+gr-etcetera/acarsdec.lwr
+gr-etcetera/airprobe.lwr
+gr-etcetera/apr.lwr
+gr-etcetera/aprutil.lwr
+gr-etcetera/csdr.lwr
+gr-etcetera/db48.lwr
+gr-etcetera/dump1090.lwr
+gr-etcetera/gqrx-digital.lwr
+gr-etcetera/ice.lwr
+gr-etcetera/inspectrum.lwr
+gr-etcetera/kal.lwr
+gr-etcetera/libboost-random.lwr
+gr-etcetera/libconfig.lwr
+gr-etcetera/libfec.lwr
+gr-etcetera/libjsoncpp.lwr
+gr-etcetera/liquid-dsp.lwr
+gr-etcetera/multi-rtl.lwr
+gr-etcetera/pyconstruct.lwr
+gr-etcetera/python-scapy.lwr
+gr-etcetera/rtl_433.lwr
+gr-etcetera/simple_radio_astronomy.lwr
