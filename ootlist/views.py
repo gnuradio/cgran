@@ -64,7 +64,7 @@ def refresh(request):
     ubuntu16 = 'https://packages.ubuntu.com/xenial/gnuradio'
     ubuntu17 = 'https://packages.ubuntu.com/artful/gnuradio'
     ubuntu18 = 'https://packages.ubuntu.com/bionic/gnuradio'
-    ubuntus = [(ubuntu14, 'Ubuntu-14'), (ubuntu16, 'Ubuntu-16'), (ubuntu17, 'Ubuntu-17'), (ubuntu18, 'Ubuntu-18')]
+    ubuntus = [(ubuntu14, 'Ubuntu-14.04'), (ubuntu16, 'Ubuntu-16.04'), (ubuntu17, 'Ubuntu-17.04'), (ubuntu18, 'Ubuntu-18.04')]
     for ubuntu in ubuntus:
         response = urllib.request.urlopen(ubuntu[0])
         html = response.read().decode('utf-8')
