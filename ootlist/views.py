@@ -87,8 +87,11 @@ def refresh(request):
     gr_etcetera = ['gr-etcetera/' + recipe for recipe in os.listdir('gr-etcetera')]
     recipes = gr_recipes + gr_etcetera
     new_oots = [] # will contain new objects, that then get saved all at once
+    f = open('blacklist.txt', 'r') # read in list of recipes that are definitely not OOTs
+    blacklist = f.read().split('\n')
+    f.close()
     for recipe in recipes:
-        if '.lwr' in recipe:
+        if '.lwr' in recipe and recipe not in blacklist:
             # read the lwr file
             doc = open(recipe, 'r').read()
             indx = doc.find('source: ')
@@ -114,49 +117,42 @@ def refresh(request):
                         # parse yaml, creates dict, extract what we want
                         try:
                             processed_yaml = yaml.safe_load(f2) 
-                            #print(giturl)
-                            
-                            # blacklist stuff that's not actually an OOT (edit blacklist.txt to add more)
-                            f = open('blacklist.txt', 'r')
-                            blacklist = f.read().split('\n')
-                            f.close()
-                            if giturl not in blacklist:
-                                # fetch branches page of github to find the most recent commit
-                                f = urllib.request.urlopen('https://github.com/' + giturl + '/branches') 
-                                branch_page = f.read().decode('utf-8') # this converts it from a byte object to a python string   
-                                updateds = [m.start() for m in re.finditer('time-ago datetime=', branch_page)]
-                                dates = []
-                                for updated in updateds:
-                                    date = branch_page[updated+19:updated+29] # pull out date in year-mn-dy format
-                                    dates.append(datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))) # parse out year/month/day  
-                                if dates: # if dates is empty its an indication the URL was broken so the OOT doesn't get added to the list
-                                    commit_date = max(dates) # most recent commit
-                                    if processed_yaml: # if the MANIFEST file existed
-                                        new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
-                                                                        tags = ", ".join(processed_yaml.get('tags',['None'])), 
-                                                                        description = processed_yaml.get('brief', 'None'), 
-                                                                        repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
-                                                                        last_commit = commit_date,
-                                                                        author = ", ".join(processed_yaml.get('author', ['None'])),
-                                                                        dependencies = ", ".join(processed_yaml.get('dependencies', ['None'])),
-                                                                        copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
-                                                                        icon = processed_yaml.get('icon', 'None'),
-                                                                        website = processed_yaml.get('website', 'None'),
-                                                                        body_text = body_text)) 
-                                    else:
-                                        new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
-                                                                        tags = 'None', 
-                                                                        description = 'None', 
-                                                                        repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
-                                                                        last_commit = commit_date,
-                                                                        author = 'None',
-                                                                        dependencies = 'None',
-                                                                        copyright_owner = 'None',
-                                                                        icon = 'None',
-                                                                        website = 'None',
-                                                                        body_text = body_text))                                                        
+                            # fetch branches page of github to find the most recent commit
+                            f = urllib.request.urlopen('https://github.com/' + giturl + '/branches') 
+                            branch_page = f.read().decode('utf-8') # this converts it from a byte object to a python string   
+                            updateds = [m.start() for m in re.finditer('time-ago datetime=', branch_page)]
+                            dates = []
+                            for updated in updateds:
+                                date = branch_page[updated+19:updated+29] # pull out date in year-mn-dy format
+                                dates.append(datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))) # parse out year/month/day  
+                            if dates: # if dates is empty its an indication the URL was broken so the OOT doesn't get added to the list
+                                commit_date = max(dates) # most recent commit
+                                if processed_yaml: # if the MANIFEST file existed
+                                    new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+                                                                    tags = ", ".join(processed_yaml.get('tags',['None'])), 
+                                                                    description = processed_yaml.get('brief', 'None'), 
+                                                                    repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
+                                                                    last_commit = commit_date,
+                                                                    author = ", ".join(processed_yaml.get('author', ['None'])),
+                                                                    dependencies = ", ".join(processed_yaml.get('dependencies', ['None'])),
+                                                                    copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
+                                                                    icon = processed_yaml.get('icon', 'None'),
+                                                                    website = processed_yaml.get('website', 'None'),
+                                                                    body_text = body_text)) 
                                 else:
-                                    print('error- recipe ' + recipe + ' had a broken URL')
+                                    new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+                                                                    tags = 'None', 
+                                                                    description = 'None', 
+                                                                    repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest 
+                                                                    last_commit = commit_date,
+                                                                    author = 'None',
+                                                                    dependencies = 'None',
+                                                                    copyright_owner = 'None',
+                                                                    icon = 'None',
+                                                                    website = 'None',
+                                                                    body_text = body_text))                                                        
+                            else:
+                                print('error- recipe ' + recipe + ' had a broken URL')
                                     
                         except yaml.YAMLError:
                             print(giturl, "had error parsing MANIFEST yaml")
@@ -164,11 +160,11 @@ def refresh(request):
                             print('error opening up the branches page of recipe: ' + recipe)
 
                     else:
-                        print('*** Skipping recipe' + recipe + ' because its not github based')    
+                        print('*** Skipping recipe ' + recipe + ' because its not github based')    
                 else: 
-                    print('error- recipe' + recipe + ' had no new line at the end of the source field')    
+                    print('error- recipe ' + recipe + ' had no new line at the end of the source field')    
             else: 
-                print('error- recipe' + recipe + ' had no source: field')    
+                print('error- recipe ' + recipe + ' had no source: field')    
                         
     # Go through and manually add a bunch of OOTs that do not use github
     new_oots.append(Outoftreemodule(name = 'gr-iqbal'.replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)

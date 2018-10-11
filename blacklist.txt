@@ -1,3 +1,9 @@
+gr-recipes/gr-iqbal.lwr
+gr-recipes/gr-fosphor.lwr
+gr-recipes/gr-osmosdr.lwr
+gr-recipes/liblog4cpp.lwr
+gr-recipes/gr-op25.lwr
+gr-etcetera/gr-binviz.lwr
 gr-recipes/airspy.lwr
 gr-recipes/airspyhf.lwr
 gr-recipes/alsa.lwr
