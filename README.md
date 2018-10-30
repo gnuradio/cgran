@@ -11,10 +11,9 @@
 * install docker-ce with https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 * install docker-compose with https://docs.docker.com/compose/install/#prerequisites
 * allow running docker as non-root with https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+* rename settings_secret.py.template to settings_secret.py and change the value of the secret key to something else (anything else)
 
 ### To launch app
-
-If you havent done it already, rename settings_secret.py.template to settings_secret.py and change the value of the secret key to something else (anything else)
 
 `docker-compose up --build --no-deps`
 
