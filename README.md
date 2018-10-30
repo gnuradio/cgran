@@ -8,7 +8,6 @@
 
 ### To Install
 * clone this repo
-* pip3 install -r requirements.txt
 * install docker-ce with https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 * install docker-compose with https://docs.docker.com/compose/install/#prerequisites
 * allow running docker as non-root with https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
