@@ -15,7 +15,7 @@ services:
   web:
     build: .
     container_name: web
-    command: bash -c "python3 manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && gunicorn -t 200 cgran.wsgi -b 0.0.0.0:8000"
+    command: bash -c "python3 manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && gunicorn -t 2000 cgran.wsgi -b 0.0.0.0:8000"
     depends_on:
       - db
     volumes:
