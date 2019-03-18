@@ -1,5 +1,5 @@
 # on Aug 13 2018 Marc went through and hardcoded the latest version for each one, after testing the site
-django==2.1.5
+django==2.1.7
 django_tables2==1.21.2
 pyyaml==4.2b1
 datetime==4.2
