@@ -60,11 +60,11 @@ def refresh(request):
 
     # pull versions of gnuradio in ubuntu packages
     Packageversion.objects.all().delete() # clear out the table
-    ubuntu14 = 'https://packages.ubuntu.com/trusty/gnuradio'
     ubuntu16 = 'https://packages.ubuntu.com/xenial/gnuradio'
     ubuntu18 = 'https://packages.ubuntu.com/bionic/gnuradio'
-    ubuntus = [(ubuntu14, 'Ubuntu-14.04'), (ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04')]
+    ubuntus = [(ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04')]
     for ubuntu in ubuntus:
+        print(ubuntu)
         response = urllib.request.urlopen(ubuntu[0])
         html = response.read().decode('utf-8')
         indx = html.find('Package: gnuradio')
@@ -92,6 +92,7 @@ def refresh(request):
     for recipe in recipes:
         if '.lwr' in recipe and recipe not in blacklist:
             # read the lwr file
+            print(recipe)
             doc = open(recipe, 'r').read()
             indx = doc.find('source: ')
             if indx != -1:
