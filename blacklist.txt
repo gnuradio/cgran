@@ -43,6 +43,7 @@ gr-recipes/gnuradio-default.lwr
 gr-recipes/gnuradio-stable.lwr
 gr-recipes/gnuradio.lwr
 gr-recipes/gnuradio37.lwr
+gr-recipes/gnuradio38.lwr
 gr-recipes/gnutls.lwr
 gr-recipes/gobject-introspection.lwr
 gr-recipes/gperftools.lwr
@@ -172,3 +173,5 @@ gr-etcetera/rtl_433.lwr
 gr-etcetera/simple_radio_astronomy.lwr
 gr-etcetera/rtl_waterfall.lwr
 gr-etcetera/cython.lwr
+gr-etcetera/soapyplutosdr.lwr
+
