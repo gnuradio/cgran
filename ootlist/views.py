@@ -184,7 +184,7 @@ def refresh(request):
                                     tags = ", ".join(['fft','gpu','opencl','opengl']), 
                                     description = 'GNU Radio block for RTSA-like spectrum visualization using OpenCL and OpenGL acceleration', 
                                     repo = 'git://git.osmocom.org/gr-fosphor', 
-                                    last_commit = parse_datetime('2016-05-22 11:47:58'),
+                                    last_commit = parse_datetime('2018-09-25 11:47:58'),
                                     author = 'Sylvain Munaut <tnt@246tNt.com>',
                                     dependencies = 'None',
                                     copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
