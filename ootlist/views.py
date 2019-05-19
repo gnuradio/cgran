@@ -62,7 +62,8 @@ def refresh(request):
     Packageversion.objects.all().delete() # clear out the table
     ubuntu16 = 'https://packages.ubuntu.com/xenial/gnuradio'
     ubuntu18 = 'https://packages.ubuntu.com/bionic/gnuradio'
-    ubuntus = [(ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04')]
+    ubuntu19 = 'https://packages.ubuntu.com/disco/gnuradio'
+    ubuntus = [(ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04'), (ubuntu19, 'Ubuntu-19.04')]
     for ubuntu in ubuntus:
         print(ubuntu)
         response = urllib.request.urlopen(ubuntu[0])
