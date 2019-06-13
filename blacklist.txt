@@ -175,3 +175,4 @@ gr-etcetera/rtl_waterfall.lwr
 gr-etcetera/cython.lwr
 gr-etcetera/soapyplutosdr.lwr
 gr-etcetera/gr-gpredict-doppler-38.lwr
+gr-etcetera/gr-grnet38.lwr
