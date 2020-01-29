@@ -139,7 +139,8 @@ def refresh(request):
                                                                     copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
                                                                     icon = processed_yaml.get('icon', 'None'),
                                                                     website = processed_yaml.get('website', 'None'),
-                                                                    body_text = body_text)) 
+                                                                    gr_supported_version = processed_yaml.get('gr_supported_version', ''),
+                                                                    body_text = body_text))
                                 else:
                                     new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
                                                                     tags = 'None', 
@@ -151,7 +152,8 @@ def refresh(request):
                                                                     copyright_owner = 'None',
                                                                     icon = 'None',
                                                                     website = 'None',
-                                                                    body_text = body_text))                                                        
+                                                                    gr_supported_version = '',
+                                                                    body_text = body_text))
                             else:
                                 print('error- recipe ' + recipe + ' had a broken URL')
                                     
@@ -178,8 +180,9 @@ def refresh(request):
                                     copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
                                     icon = 'http://people.osmocom.org/~tnt/stuff/iqbal-icon.png',
                                     website = 'None',
-                                    body_text = ' '))      
-    
+                                    gr_supported_version = 'v3.7, v3.8',
+                                    body_text = ' '))
+
     new_oots.append(Outoftreemodule(name = 'gr-fosphor'.replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
                                     tags = ", ".join(['fft','gpu','opencl','opengl']), 
                                     description = 'GNU Radio block for RTSA-like spectrum visualization using OpenCL and OpenGL acceleration', 
@@ -190,8 +193,9 @@ def refresh(request):
                                     copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
                                     icon = 'http://people.osmocom.org/~tnt/stuff/fosphor-icon.png',
                                     website = 'None',
-                                    body_text = ' '))  
-                                        
+                                    gr_supported_version = 'v3.7, v3.8',
+                                    body_text = ' '))
+
     # clear table
     Outoftreemodule.objects.all().delete()
     # all the new objects to db

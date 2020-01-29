@@ -8,7 +8,7 @@ class OutoftreemoduleTable(tables.Table):
     tags = tables.Column(verbose_name='Categories')
     description = tables.Column(orderable=False) # no reason to ever sort by description imo
     last_commit = tables.Column(verbose_name='Most Recent Commit')
-    
+    gr_supported_version = tables.Column(verbose_name='GNU Radio supported versions')
     ''' this used the value of the status field to color the row, but it didn't look great
     def render_status(self, value, column):
         if value == 'maintained':
@@ -21,8 +21,8 @@ class OutoftreemoduleTable(tables.Table):
             column.attrs = {'td': {}}
         return value
     '''
-            
+
     class Meta:
         model = Outoftreemodule
-        fields = ('name', 'last_commit', 'description', 'tags') # fields to display
+        fields = ('name', 'last_commit', 'description', 'tags', 'gr_supported_version') # fields to display
         attrs = {'class': 'table table-condensed'} # uses bootstrap table style

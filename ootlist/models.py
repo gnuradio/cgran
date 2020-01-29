@@ -16,8 +16,9 @@ class Outoftreemodule(models.Model):
     copyright_owner = models.CharField(max_length=500, null=True, blank=True)
     icon = models.CharField(max_length=500, null=True, blank=True) # most urls provided by people dont even work anymore, so dont display the icon for now
     website = models.CharField(max_length=500, null=True, blank=True)
+    gr_supported_version = models.CharField(max_length=500, null=True, blank=True)
     body_text = models.TextField(max_length=50000, null=True, blank=True)
-    
+
 class Packageversion(models.Model):
     os_name = models.CharField(max_length=500)
     gr_version_string = models.CharField(max_length=500)
