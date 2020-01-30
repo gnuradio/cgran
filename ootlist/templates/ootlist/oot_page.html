@@ -29,8 +29,11 @@
 
 <div class="container">
   <h1>  {{ oot.name }} </h1>
-  <div class="container" style="margin-left: 2em;">
-  <ul class="list-group">
+  <div style="float:left; width: 300px;height: 300px;">
+    <img src="{{ oot.icon }}" alt="img" class="img-responsive">
+  </div>
+  <div class="container" style="width: 500px; float: left">
+  <ul class="list-group" display="inline">
     <li class="list-group-item" style="border: none">
       <b>Tags:</b>            {{ oot.tags }}</li>
     <li class="list-group-item" style="border: none">
@@ -48,15 +51,17 @@
     <li class="list-group-item" style="border: none">
       <b>Copyright Owner:</b> {{ oot.copyright_owner }}</li>
     <li class="list-group-item" style="border: none">
+      <b>Supported GNU Radio versions:</b> {{ oot.gr_supported_version }}</li>
+    <li class="list-group-item" style="border: none">
       <b>Brief:</b>           {{ oot.description }}</li>
   </ul>
   </div>
+</div>
 
   <h1>Module Info</h1>
     <div class="container" style="margin-left: 2em;">
       {{ oot.body_text |safe }}
     </div>
-</div>
 
 </body>
 

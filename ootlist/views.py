@@ -12,6 +12,27 @@ from .tables import OutoftreemoduleTable
 from .forms import SearchForm
 
 from django.utils.dateparse import parse_datetime
+import requests
+from socket import gaierror
+
+def validate_icon_URL(url):
+    """
+    checks if an icon URL is provided and validates the http
+    request. If validation succeds, the provided URL is set to
+    the icon. otherwise, a default no-logo image is propagated.
+    """
+    # TODO: In addition of checking if the URL is alive, check
+    # if it only contains a supported image
+    icon = '/static/ootlist/images/cgran_no_logo.png'
+    if url:
+        try:
+            code = requests.get(url).status_code
+            if code == requests.codes.ok:
+                icon = url
+        except (OSError, gaierror) as err:
+            print("*** Invalid logo URL")
+            pass
+    return icon
 
 def index(request):
     package_versions = Packageversion.objects.all()
@@ -137,7 +158,7 @@ def refresh(request):
                                                                     author = ", ".join(processed_yaml.get('author', ['None'])),
                                                                     dependencies = ", ".join(processed_yaml.get('dependencies', ['None'])),
                                                                     copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
-                                                                    icon = processed_yaml.get('icon', 'None'),
+                                                                    icon = validate_icon_URL(processed_yaml.get('icon', '')),
                                                                     website = processed_yaml.get('website', 'None'),
                                                                     gr_supported_version = processed_yaml.get('gr_supported_version', ''),
                                                                     body_text = body_text))
@@ -150,7 +171,7 @@ def refresh(request):
                                                                     author = 'None',
                                                                     dependencies = 'None',
                                                                     copyright_owner = 'None',
-                                                                    icon = 'None',
+                                                                    icon = validate_icon_URL(''),
                                                                     website = 'None',
                                                                     gr_supported_version = '',
                                                                     body_text = body_text))
