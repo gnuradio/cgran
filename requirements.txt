@@ -1,8 +1,10 @@
 # on Aug 13 2018 Marc went through and hardcoded the latest version for each one, after testing the site
 django==2.2.9
 django_tables2==1.21.2
+pillow==3.1.2
+requests==2.22.0
 pyyaml==4.2b1
 datetime==4.2
-gunicorn==19.9.0  
+gunicorn==19.9.0
 psycopg2-binary==2.7.5  # postgres stuff
 mistune==0.8.3  # markdown parser
