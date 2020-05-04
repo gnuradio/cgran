@@ -1,3 +1,4 @@
+gr-recipes/libvolk.lwr
 gr-recipes/gr-iqbal.lwr
 gr-recipes/gr-fosphor.lwr
 gr-recipes/gr-osmosdr.lwr

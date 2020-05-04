@@ -84,7 +84,8 @@ def refresh(request):
     ubuntu16 = 'https://packages.ubuntu.com/xenial/gnuradio'
     ubuntu18 = 'https://packages.ubuntu.com/bionic/gnuradio'
     ubuntu19 = 'https://packages.ubuntu.com/disco/gnuradio'
-    ubuntus = [(ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04'), (ubuntu19, 'Ubuntu-19.04')]
+    ubuntu20 = 'https://packages.ubuntu.com/focal/gnuradio'
+    ubuntus = [(ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04'), (ubuntu19, 'Ubuntu-19.04'), (ubuntu20, 'Ubuntu-20.04')]
     for ubuntu in ubuntus:
         print(ubuntu)
         response = urllib.request.urlopen(ubuntu[0])
@@ -195,7 +196,7 @@ def refresh(request):
                                     tags = ", ".join(['iq imbalance','rx','osmocom']),
                                     description = 'GNU Radio block to correct IQ imbalance in quadrature receivers',
                                     repo = 'git://git.osmocom.org/gr-iqbal',
-                                    last_commit = parse_datetime('2015-11-21 11:47:58'),
+                                    last_commit = parse_datetime('2019-12-04 11:47:58'),
                                     author = 'Sylvain Munaut <tnt@246tNt.com>',
                                     dependencies = 'None',
                                     copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
@@ -208,7 +209,7 @@ def refresh(request):
                                     tags = ", ".join(['fft','gpu','opencl','opengl']),
                                     description = 'GNU Radio block for RTSA-like spectrum visualization using OpenCL and OpenGL acceleration',
                                     repo = 'git://git.osmocom.org/gr-fosphor',
-                                    last_commit = parse_datetime('2018-09-25 11:47:58'),
+                                    last_commit = parse_datetime('2019-12-08 11:47:58'),
                                     author = 'Sylvain Munaut <tnt@246tNt.com>',
                                     dependencies = 'None',
                                     copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
