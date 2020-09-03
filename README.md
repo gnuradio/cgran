@@ -12,6 +12,9 @@
 * install docker-compose with https://docs.docker.com/compose/install/#prerequisites
 * allow running docker as non-root with https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
 * rename settings_secret.py.template to settings_secret.py and change the value of the secret key to something else (anything else)
+* create a cronjob on the server running the docker container
+  1. `crontab -e`
+  2. `0 1 * * * docker exec -ti cgran_cgran_web_1 /bin/sh -c "python manage.py refresh"`
 
 ### To launch app
 
