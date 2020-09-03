@@ -90,6 +90,7 @@ class Command(BaseCommand): # must be called command, use file name to name the 
             giturl = giturl.replace('git+https://github.com/', '') # remove the first portion
             giturl = giturl.replace('https://github.com/', '') # in case git+ wasn't provided
             giturl = giturl.replace('.git','') # remove the .git that most of them have at the end
+            giturl = giturl.replace('#','') # the pound symbol will cause an error with urllib's request
             giturl = giturl.replace('/releases/download/v2.6.1/protobuf-2.6.1.tar.gz','') # the protobufs recipe is a weird one
             
             # Pull down and read the MANIFEST file
