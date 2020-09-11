@@ -123,6 +123,9 @@ class Command(BaseCommand): # must be called command, use file name to name the 
                     continue
                 commit_date = max(dates) # most recent commit
                 if processed_yaml: # if the MANIFEST file existed
+                    supported_version = processed_yaml.get('gr_supported_version', '')
+                    if supported_version:
+                        supported_version.replace("'","").replace("[","").replace("]","")
                     new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
                                                     tags = ", ".join(processed_yaml.get('tags',['None'])),
                                                     description = processed_yaml.get('brief', 'None'),
@@ -133,7 +136,7 @@ class Command(BaseCommand): # must be called command, use file name to name the 
                                                     copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
                                                     icon = validate_icon_URL(processed_yaml.get('icon', '')),
                                                     website = processed_yaml.get('website', 'None'),
-                                                    gr_supported_version = processed_yaml.get('gr_supported_version', '').replace("'","").replace("[","").replace("]",""),
+                                                    gr_supported_version = supported_version,
                                                     body_text = body_text))
                 else:
                     new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
