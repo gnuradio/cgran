@@ -24,9 +24,10 @@ class Command(BaseCommand): # must be called command, use file name to name the 
         Packageversion.objects.all().delete() # clear out the table
         ubuntu16 = 'https://packages.ubuntu.com/xenial/gnuradio'
         ubuntu18 = 'https://packages.ubuntu.com/bionic/gnuradio'
-        ubuntu19 = 'https://packages.ubuntu.com/eoan/gnuradio'
+        #ubuntu19 = 'https://packages.ubuntu.com/eoan/gnuradio'
         ubuntu20 = 'https://packages.ubuntu.com/focal/gnuradio'
-        ubuntus = [(ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04'), (ubuntu19, 'Ubuntu-19.10'), (ubuntu20, 'Ubuntu-20.04')]
+        #ubuntus = [(ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04'), (ubuntu19, 'Ubuntu-19.10'), (ubuntu20, 'Ubuntu-20.04')]
+        ubuntus = [(ubuntu16, 'Ubuntu-16.04'), (ubuntu18, 'Ubuntu-18.04'), (ubuntu20, 'Ubuntu-20.04')]
         for ubuntu in ubuntus:
             print(ubuntu)
             response = urllib.request.urlopen(ubuntu[0])
