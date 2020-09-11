@@ -33,7 +33,9 @@ class Command(BaseCommand): # must be called command, use file name to name the 
             html = response.read().decode('utf-8')
             indx = html.find('Package: gnuradio')
             indx2 = html[indx:].find('-')
-            new_packageversion = Packageversion(os_name = ubuntu[1], gr_version_string = html[indx+19:indx+indx2])
+            version_string = html[indx+19:indx+indx2]
+            print(version_string)
+            new_packageversion = Packageversion(os_name = ubuntu[1], gr_version_string = version_string)
             new_packageversion.save() # add to db
 
         def git(*args):
