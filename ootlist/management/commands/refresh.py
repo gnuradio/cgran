@@ -124,7 +124,7 @@ class Command(BaseCommand): # must be called command, use file name to name the 
                 commit_date = max(dates) # most recent commit
                 if processed_yaml: # if the MANIFEST file existed
                     supported_version = processed_yaml.get('gr_supported_version', '')
-                    if supported_version:
+                    if isinstance(supported_version, str):
                         supported_version.replace("'","").replace("[","").replace("]","")
                     new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
                                                     tags = ", ".join(processed_yaml.get('tags',['None'])),
