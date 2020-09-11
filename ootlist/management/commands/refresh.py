@@ -133,7 +133,7 @@ class Command(BaseCommand): # must be called command, use file name to name the 
                                                     copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
                                                     icon = validate_icon_URL(processed_yaml.get('icon', '')),
                                                     website = processed_yaml.get('website', 'None'),
-                                                    gr_supported_version = processed_yaml.get('gr_supported_version', ''),
+                                                    gr_supported_version = processed_yaml.get('gr_supported_version', '').replace("'","").replace("[","").replace("]",""),
                                                     body_text = body_text))
                 else:
                     new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
