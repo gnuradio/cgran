@@ -126,13 +126,19 @@ class Command(BaseCommand): # must be called command, use file name to name the 
                     supported_version = processed_yaml.get('gr_supported_version', '')
                     if isinstance(supported_version, list):
                         supported_version = ','.join(supported_version)
+                    deps = processed_yaml.get('dependencies', ['None'])
+                    if deps:
+                        if isinstance(deps, list):
+                            deps = ", ".join(deps)
+                    else:
+                        deps = 'None'
                     new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
                                                     tags = ", ".join(processed_yaml.get('tags',['None'])),
                                                     description = processed_yaml.get('brief', 'None'),
                                                     repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest
                                                     last_commit = commit_date,
                                                     author = ", ".join(processed_yaml.get('author', ['None'])),
-                                                    dependencies = ", ".join(processed_yaml.get('dependencies', ['None'])),
+                                                    dependencies = dps,
                                                     copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
                                                     icon = validate_icon_URL(processed_yaml.get('icon', '')),
                                                     website = processed_yaml.get('website', 'None'),
