@@ -138,7 +138,7 @@ class Command(BaseCommand): # must be called command, use file name to name the 
                                                     repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest
                                                     last_commit = commit_date,
                                                     author = ", ".join(processed_yaml.get('author', ['None'])),
-                                                    dependencies = dps,
+                                                    dependencies = deps,
                                                     copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
                                                     icon = validate_icon_URL(processed_yaml.get('icon', '')),
                                                     website = processed_yaml.get('website', 'None'),
