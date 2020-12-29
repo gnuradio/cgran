@@ -1,3 +1,4 @@
+gr-recipes/pybind11.lwr
 gr-recipes/libvolk.lwr
 gr-recipes/gr-iqbal.lwr
 gr-recipes/gr-fosphor.lwr
