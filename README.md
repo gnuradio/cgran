@@ -24,10 +24,6 @@ or
 
 `docker-compose up`
 
-### Current TODO list
-
-* make the parsing script automatically run once a day, at like 3am
-
 ### Notepad to self
 
 * For shell accessing- `docker exec -ti nginx bash` or `docker exec -ti web bash` 
