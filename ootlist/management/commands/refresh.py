@@ -164,33 +164,6 @@ class Command(BaseCommand): # must be called command, use file name to name the 
             except urllib.error.HTTPError:
                 print('    error opening up the branches page of recipe: ' + recipe)
 
-        # Go through and manually add a bunch of OOTs that do not use github
-        new_oots.append(Outoftreemodule(name = 'gr-iqbal'.replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
-                                        tags = ", ".join(['iq imbalance','rx','osmocom']),
-                                        description = 'GNU Radio block to correct IQ imbalance in quadrature receivers',
-                                        repo = 'git://git.osmocom.org/gr-iqbal',
-                                        last_commit = parse_datetime('2019-12-04 11:47:58'),
-                                        author = 'Sylvain Munaut <tnt@246tNt.com>',
-                                        dependencies = 'None',
-                                        copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
-                                        icon = 'http://people.osmocom.org/~tnt/stuff/iqbal-icon.png',
-                                        website = 'None',
-                                        gr_supported_version = 'v3.7, v3.8',
-                                        body_text = ' '))
-
-        new_oots.append(Outoftreemodule(name = 'gr-fosphor'.replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
-                                        tags = ", ".join(['fft','gpu','opencl','opengl']),
-                                        description = 'GNU Radio block for RTSA-like spectrum visualization using OpenCL and OpenGL acceleration',
-                                        repo = 'git://git.osmocom.org/gr-fosphor',
-                                        last_commit = parse_datetime('2019-12-08 11:47:58'),
-                                        author = 'Sylvain Munaut <tnt@246tNt.com>',
-                                        dependencies = 'None',
-                                        copyright_owner = 'Sylvain Munaut <tnt@246tNt.com>',
-                                        icon = 'http://people.osmocom.org/~tnt/stuff/fosphor-icon.png',
-                                        website = 'None',
-                                        gr_supported_version = 'v3.7, v3.8',
-                                        body_text = ' '))
-
         # clear table
         Outoftreemodule.objects.all().delete()
         # all the new objects to db
