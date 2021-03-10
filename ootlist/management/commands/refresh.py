@@ -86,7 +86,9 @@ class Command(BaseCommand): # must be called command, use file name to name the 
                 recipe_yaml = yaml.safe_load(ff)
             # Pull out github URL
             gitbranch = recipe_yaml.get("gitbranch", "master") # some use main instead of master
-            giturl = recipe_yaml.get("source", None)
+            giturl = recipe_yaml.get("mirror", None) # check if there's a mirror specified, this is used when the main repo isnt through github
+            if not giturl:
+                giturl = recipe_yaml.get("source", None)
             if not giturl:
                 print("    No source entry in Manifest")
                 continue
