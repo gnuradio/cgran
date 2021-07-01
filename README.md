@@ -24,6 +24,8 @@ or
 
 `docker-compose up`
 
+Refresh database with: `python manage.py refresh`
+
 ### Notepad to self
 
 * For shell accessing- `docker exec -ti nginx bash` or `docker exec -ti web bash` 
