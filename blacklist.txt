@@ -1,3 +1,13 @@
+gr-recipes/soapyairspy.lwr
+gr-recipes/soapyairspyhf.lwr
+gr-recipes/soapybladerf.lwr 
+gr-recipes/soapyhackrf.lwr
+gr-recipes/soapymultisdr.lwr
+gr-recipes/soapyremote.lwr
+gr-recipes/soapyrtlsdr.lwr
+gr-recipes/soapysdr.lwr
+gr-recipes/soapysdrplay.lwr
+gr-recipes/soapyuhd.lwr
 gr-recipes/pybind11.lwr
 gr-recipes/libvolk.lwr
 gr-recipes/gr-osmosdr.lwr
