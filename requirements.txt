@@ -3,7 +3,7 @@ django==2.2.24
 django_tables2==1.21.2
 pillow==8.2.0
 requests==2.22.0
-pyyaml==4.2b1
+pyyaml==5.4
 datetime==4.2
 gunicorn==19.9.0
 psycopg2-binary==2.7.5  # postgres stuff
