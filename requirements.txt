@@ -1,7 +1,7 @@
 # on Aug 13 2018 Marc went through and hardcoded the latest version for each one, after testing the site
 django==2.2.24
 django_tables2==1.21.2
-pillow==8.2.0
+pillow==9.0.1
 requests==2.22.0
 pyyaml==5.4
 datetime==4.2
