@@ -62,8 +62,8 @@ class Command(BaseCommand): # must be called command, use file name to name the 
         # who needs bash!
         shutil.rmtree('gr-recipes', ignore_errors=True)  # remove directory gr-recipes
         shutil.rmtree('gr-etcetera', ignore_errors=True) # remove directory gr-etcetera
-        git("clone", 'git://github.com/gnuradio/gr-recipes.git') # clone repo
-        git("clone", 'git://github.com/gnuradio/gr-etcetera.git') # clone repo
+        git("clone", 'https://github.com/gnuradio/gr-recipes.git') # clone repo
+        git("clone", 'https://github.com/gnuradio/gr-etcetera.git') # clone repo
 
         # get list of lwr files
         gr_recipes = ['gr-recipes/' + recipe for recipe in os.listdir('gr-recipes')]
