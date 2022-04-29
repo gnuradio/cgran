@@ -1,3 +1,4 @@
+gr-recipes/spdlog.lwr
 gr-recipes/soapyairspy.lwr
 gr-recipes/soapyairspyhf.lwr
 gr-recipes/soapybladerf.lwr 
@@ -187,3 +188,4 @@ gr-etcetera/soapyplutosdr.lwr
 gr-etcetera/gr-gpredict-doppler-38.lwr
 gr-etcetera/gr-grnet38.lwr
 gr-etcetera/scikit-commpy.lwr
+gr-etcetera/polar-codes.lwr
