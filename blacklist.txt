@@ -189,3 +189,4 @@ gr-etcetera/gr-gpredict-doppler-38.lwr
 gr-etcetera/gr-grnet38.lwr
 gr-etcetera/scikit-commpy.lwr
 gr-etcetera/polar-codes.lwr
+gr-etcetera/dsdcc.lwr
