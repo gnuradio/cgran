@@ -1,33 +1,40 @@
-# mostly came from https://github.com/ruddra/docker-django
-version: '2'  
-services:  
-  nginx:
-    image: nginx:1.23.3
-    container_name: nginx
-    ports:
-      - "8000:8000"
+version: '2'
+services:
+  db:
+    image: postgres:15.1-alpine
+    container_name: cgran_db
+    networks:
+      - backend
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  cgran_web:
+    command: /src/docker-entrypoint.sh
+    build:
+      context: ./images
+      dockerfile: Dockerfile
     volumes:
-      - .:/src
-      - ./cgran/nginx-config:/etc/nginx/conf.d
-      - /ootlist/static:/static
-    depends_on:
-      - web
-  web:
-    build: .
-    container_name: web
-    command: bash -c "python3 manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && gunicorn -t 2000 cgran.wsgi -b 0.0.0.0:8000"
+      - /data/projects/cgran/static:/static
+      - ./settings_secret.py:/src/settings_secret.py:ro
+      - ./settings.py:/src/cgran/settings.py:ro
     depends_on:
       - db
+    networks:
+      - backend
+  nginx:
+    container_name: cgran-nginx
+    image: nginx:latest
+    env_file: frontend.env
     volumes:
-      - .:/src
-      - /ootlist/static:/static
-    expose:
-      - "8000"
+      - /data/projects/cgran/static:/static:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - cgran_web
+    networks:
+      - backend
+      - frontend-web
 
-  db:
-    image: postgres:15.1
-    environment:
-      POSTGRES_DB: "db"
-      POSTGRES_HOST_AUTH_METHOD: "trust"
-    container_name: db
-
+networks:
+  frontend-web:
+    external: true
+  backend:
+    driver: bridge
