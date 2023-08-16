@@ -20,3 +20,4 @@ tests/report/
 gr-etcetera/
 gr-recipes/
 ootlist/migrations/
+db.sqlite3
