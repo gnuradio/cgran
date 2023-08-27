@@ -6,12 +6,14 @@ from django.template import loader
 from django_tables2 import RequestConfig
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Outoftreemodule
 from .models import Packageversion
 from .tables import OutoftreemoduleTable
 from .forms import SearchForm
 
+@csrf_exempt
 def index(request):
     package_versions = Packageversion.objects.all()
     if request.method == 'POST': # if this is a POST request we need to process the form data
