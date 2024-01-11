@@ -5,12 +5,13 @@ import shutil
 import yaml # yaml parser
 from io import StringIO # allows strings to be converted to file object type things
 import re
-import datetime
+from dateutil.parser import isoparse
 import mistune # markdown parser
 from ootlist.models import Outoftreemodule
 from ootlist.models import Packageversion
 from socket import gaierror
 import requests
+import logging
 
 def scrape():
     print("RUNING SCRAPER")
@@ -104,20 +105,36 @@ def scrape():
         # parse yaml, creates dict, extract what we want
         try:
             processed_yaml = yaml.safe_load(top_yaml)
-            # fetch branches page of github to find the most recent commit
-            f = urllib.request.urlopen('https://github.com/' + giturl + '/branches')
-            branch_page = f.read().decode('utf-8') # this converts it from a byte object to a python string
-            updateds = [m.start() for m in re.finditer('datetime=', branch_page)]
-            dates = []
-            for updated in updateds:
-                date = branch_page[updated+10:updated+20] # pull out date in year-mn-dy format
-                dates.append(datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))) # parse out year/month/day
-            if not dates: # if dates is empty its an indication the URL was broken so the OOT doesn't get added to the list
-                print("    dates was empty")
+            try:
+                """
+                Just ask the github API for the newest commit. No HTML parsing required.
+
+                This is how you do it using curl and jq:
+                ```shell
+                curl -L \
+                -H "Accept: application/vnd.github+json" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                "https://api.github.com/repos/OWNER/REPO/commits?per_page=1" \
+                | jq '.[0].commit.author.date'
+                ```
+                """
+                response = requests.get(f"https://api.github.com/repos/{giturl}/commits?per_page=1",
+                                        headers={
+                                            "X-GitHub-Api-Version": "2022-11-28",
+                                            "Accept": "application/vnd.github+json"
+                                        },
+                                        allow_redirects=True
+                                        )
+                try:
+                    commit_date = isoparse(response.json()[0]["commit"]["author"]["date"])
+                except Exception as e:
+                    logging.warn(f"Failed to extract latest commit from response for {giturl}")
+                    raise e
+            except Exception as e:
+                logging.warn(f"Failed to get latest commit:\n{e}\nSetting None")
                 commit_date = None
-            else:
-                commit_date = max(dates) # most recent commit
-            if processed_yaml: # if the MANIFEST file existed
+
+            if processed_yaml:  # if the MANIFEST file existed
                 supported_version = processed_yaml.get('gr_supported_version', '')
                 if isinstance(supported_version, list):
                     supported_version = ','.join(supported_version)
@@ -154,8 +171,6 @@ def scrape():
                                                 body_text = body_text))
         except yaml.YAMLError:
             print("   ", giturl, "had error parsing MANIFEST yaml")
-        except urllib.error.HTTPError:
-            print('    error opening up the branches page of recipe: ' + recipe)
         except Exception as e:
             print(e)
 
