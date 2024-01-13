@@ -23,7 +23,7 @@ def scrape():
     ubuntus = [(ubuntu20, 'Ubuntu-20.04'), (ubuntu22, 'Ubuntu-22.04')]
     for ubuntu in ubuntus:
         print(ubuntu)
-        response = urllib.request.urlopen(ubuntu[0])
+        response = urllib.request.urlopen(ubuntu[0], timeout=10)
         html = response.read().decode('utf-8')
         indx = html.find('Package: gnuradio')
         indx2 = html[indx:].find('-')
