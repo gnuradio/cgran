@@ -1,5 +1,5 @@
 # on Aug 13 2018 Marc went through and hardcoded the latest version for each one, after testing the site
-django==4.1.4
+django==4.1.13
 django_tables2==2.4.1
 pillow==9.3.0
 requests==2.28.1
