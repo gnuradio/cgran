@@ -20,7 +20,8 @@ def scrape():
     Packageversion.objects.all().delete() # clear out the table
     ubuntu20 = 'https://packages.ubuntu.com/focal/gnuradio'
     ubuntu22 = 'https://packages.ubuntu.com/jammy/gnuradio'
-    ubuntus = [(ubuntu20, 'Ubuntu-20.04'), (ubuntu22, 'Ubuntu-22.04')]
+    ubuntu24 = 'https://packages.ubuntu.com/noble/gnuradio'
+    ubuntus = [(ubuntu20, 'Ubuntu-20.04'), (ubuntu22, 'Ubuntu-22.04'), (ubuntu24, 'Ubuntu-24.04')]
     for ubuntu in ubuntus:
         print(ubuntu)
         response = urllib.request.urlopen(ubuntu[0], timeout=10)
