@@ -12,6 +12,7 @@ from ootlist.models import Packageversion
 from socket import gaierror
 import requests
 import logging
+import time
 
 def scrape():
     print("RUNING SCRAPER")
@@ -24,14 +25,17 @@ def scrape():
     ubuntus = [(ubuntu20, 'Ubuntu-20.04'), (ubuntu22, 'Ubuntu-22.04'), (ubuntu24, 'Ubuntu-24.04')]
     for ubuntu in ubuntus:
         print(ubuntu)
-        response = urllib.request.urlopen(ubuntu[0], timeout=10)
-        html = response.read().decode('utf-8')
-        indx = html.find('Package: gnuradio')
-        indx2 = html[indx:].find('-')
-        version_string = html[indx+19:indx+indx2]
-        print(version_string)
-        new_packageversion = Packageversion(os_name = ubuntu[1], gr_version_string = version_string)
-        new_packageversion.save() # add to db
+        try:
+            response = urllib.request.urlopen(ubuntu[0], timeout=10)
+            html = response.read().decode('utf-8')
+            indx = html.find('Package: gnuradio')
+            indx2 = html[indx:].find('-')
+            version_string = html[indx+19:indx+indx2]
+            print(version_string)
+            new_packageversion = Packageversion(os_name = ubuntu[1], gr_version_string = version_string)
+            new_packageversion.save() # add to db
+        except Exception as e:
+            logging.warn(f"Failed to get Ubuntu version:\n{e}\n")
 
     def git(*args):
         return subprocess.check_call(['git'] + list(args))
@@ -69,6 +73,7 @@ def scrape():
     blacklist = f.read().split('\n')
     f.close()
     for recipe in recipes:
+        time.sleep(30) # for github last commit fetcher to work without getting DOS blocked
         if '.lwr' not in recipe:
             continue
         if recipe in blacklist:
@@ -119,6 +124,7 @@ def scrape():
                 | jq '.[0].commit.author.date'
                 ```
                 """
+                time.sleep(30) # for github last commit fetcher to work without getting DOS blocked
                 response = requests.get(f"https://api.github.com/repos/{giturl}/commits?per_page=1",
                                         headers={
                                             "X-GitHub-Api-Version": "2022-11-28",
