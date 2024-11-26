@@ -140,7 +140,10 @@ def scrape():
             except Exception as e:
                 logging.warn(f"Failed to get latest commit:\n{e}\nSetting None")
                 commit_date = None
-
+            oot_name = giturl.split('/')[1].replace('-','‑') # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+            if oot_name == '' or oot_name is None:
+                print("OOT Name was blank or didnt have a / in it")
+                continue
             if processed_yaml:  # if the MANIFEST file existed
                 supported_version = processed_yaml.get('gr_supported_version', '')
                 if isinstance(supported_version, list):
@@ -151,7 +154,7 @@ def scrape():
                         deps = ", ".join(deps)
                 else:
                     deps = 'None'
-                new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+                new_oots.append(Outoftreemodule(name = oot_name, 
                                                 tags = ", ".join(processed_yaml.get('tags',['None'])),
                                                 description = processed_yaml.get('brief', 'None'),
                                                 repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest
@@ -164,7 +167,7 @@ def scrape():
                                                 gr_supported_version = supported_version,
                                                 body_text = body_text))
             else:
-                new_oots.append(Outoftreemodule(name = giturl.split('/')[1].replace('-','‑'), # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+                new_oots.append(Outoftreemodule(name = oot_name,
                                                 tags = 'None',
                                                 description = 'None',
                                                 repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest

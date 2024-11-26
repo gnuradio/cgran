@@ -161,6 +161,11 @@ gr-recipes/wireshark.lwr
 gr-recipes/wxpython.lwr
 gr-recipes/x11.lwr
 gr-recipes/zeromq.lwr
+gr-recipes/pyconstruct.lwr
+gr-recipes/
+gr-recipes/
+gr-recipes/
+gr-recipes/
 gr-etcetera/acarsdec.lwr
 gr-etcetera/airprobe.lwr
 gr-etcetera/apr.lwr
