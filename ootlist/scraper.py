@@ -96,98 +96,101 @@ def scrape():
         giturl = giturl.replace('#','') # the pound symbol will cause an error with urllib's request
         giturl = giturl.replace('/releases/download/v2.6.1/protobuf-2.6.1.tar.gz','') # the protobufs recipe is a weird one
         
-        # Pull down and read the MANIFEST file
-        try: # a good chunk of OOTs dont have this file
-            full_url = 'https://raw.githubusercontent.com/' + giturl + '/' + gitbranch + '/MANIFEST.md'
-            f = urllib.request.urlopen(full_url)
-            manifest = f.read().decode('utf-8') # this converts it from a byte object to a python string
-        except:
-            print("    MANIFEST file missing, or it wasn't a github URL")
-            manifest = '' # this will cause the fields to be blank but it will still get listed
-        indx3 = manifest.find('---') # this bar separates header from "body_text"
-        top_yaml = StringIO(manifest[:indx3]) # annoying step, pyyaml wants a file object but i already have it in a string, so i wrap the string as a file object
-        body_text = mistune.html(manifest[indx3+3:]) # grab everything after the bar, and run it through markdown parser
-        
-        # parse yaml, creates dict, extract what we want
+        # Pull down and read the MANIFEST file, use yaml first if it exists, else look for md
         try:
-            processed_yaml = yaml.safe_load(top_yaml)
+            # MANIFEST.yml
+            print("Trying to read MANIFEST.yml")
+            full_url = 'https://raw.githubusercontent.com/' + giturl + '/' + gitbranch + '/MANIFEST.yml'
+            f = urllib.request.urlopen(full_url)
+            manifest_yaml = f.read().decode('utf-8') # this converts it from a byte object to a python string
+            processed_yaml = yaml.safe_load(manifest_yaml)
+            body_text = processed_yaml.get('description', '') # just use the description field
+        except:
             try:
-                """
-                Just ask the github API for the newest commit. No HTML parsing required.
+                # MANIFEST.md
+                print("Trying to read MANIFEST.md")
+                full_url = 'https://raw.githubusercontent.com/' + giturl + '/' + gitbranch + '/MANIFEST.md'
+                f = urllib.request.urlopen(full_url)
+                manifest = f.read().decode('utf-8') # this converts it from a byte object to a python string
+                indx3 = manifest.find('---') # this bar separates header from "body_text"
+                top_yaml = StringIO(manifest[:indx3]) # annoying step, pyyaml wants a file object but i already have it in a string, so i wrap the string as a file object
+                body_text = mistune.html(manifest[indx3+3:]) # grab everything after the bar, and run it through markdown parser
+                processed_yaml = yaml.safe_load(top_yaml)
+            except:
+                print("    MANIFEST file missing, or it wasn't a github URL")
+                manifest = '' # this will cause the fields to be blank but it will still get listed
 
-                This is how you do it using curl and jq:
-                ```shell
-                curl -L \
-                -H "Accept: application/vnd.github+json" \
-                -H "X-GitHub-Api-Version: 2022-11-28" \
-                "https://api.github.com/repos/OWNER/REPO/commits?per_page=1" \
-                | jq '.[0].commit.author.date'
-                ```
-                """
-                time.sleep(30) # for github last commit fetcher to work without getting DOS blocked
-                response = requests.get(f"https://api.github.com/repos/{giturl}/commits?per_page=1",
-                                        headers={
-                                            "X-GitHub-Api-Version": "2022-11-28",
-                                            "Accept": "application/vnd.github+json"
-                                        },
-                                        allow_redirects=True
-                                        )
-                try:
-                    commit_date = isoparse(response.json()[0]["commit"]["author"]["date"])
-                except Exception as e:
-                    logging.warn(f"Failed to extract latest commit from response for {giturl}")
-                    raise e
+        try:
+            """
+            Just ask the github API for the newest commit. No HTML parsing required.
+
+            This is how you do it using curl and jq:
+            ```shell
+            curl -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/OWNER/REPO/commits?per_page=1" \
+            | jq '.[0].commit.author.date'
+            ```
+            """
+            time.sleep(30) # for github last commit fetcher to work without getting DOS blocked
+            response = requests.get(f"https://api.github.com/repos/{giturl}/commits?per_page=1",
+                                    headers={
+                                        "X-GitHub-Api-Version": "2022-11-28",
+                                        "Accept": "application/vnd.github+json"
+                                    },
+                                    allow_redirects=True
+                                    )
+            try:
+                commit_date = isoparse(response.json()[0]["commit"]["author"]["date"])
             except Exception as e:
-                logging.warn(f"Failed to get latest commit:\n{e}\nSetting None")
-                commit_date = None
-            oot_name = giturl.split('/')[1].replace('-','‑') # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
-            if oot_name == '' or oot_name is None:
-                print("OOT Name was blank or didnt have a / in it")
-                continue
-            if processed_yaml:  # if the MANIFEST file existed
-                supported_version = processed_yaml.get('gr_supported_version', '')
-                if isinstance(supported_version, list):
-                    supported_version = ','.join(supported_version)
-                deps = processed_yaml.get('dependencies', ['None'])
-                if deps:
-                    if isinstance(deps, list):
-                        deps = ", ".join(deps)
-                else:
-                    deps = 'None'
-                new_oots.append(Outoftreemodule(name = oot_name, 
-                                                tags = ", ".join(processed_yaml.get('tags',['None'])),
-                                                description = processed_yaml.get('brief', 'None'),
-                                                repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest
-                                                last_commit = commit_date,
-                                                author = ", ".join(processed_yaml.get('author', ['None'])),
-                                                dependencies = deps,
-                                                copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
-                                                icon = validate_icon_URL(processed_yaml.get('icon', '')),
-                                                website = processed_yaml.get('website', 'None'),
-                                                gr_supported_version = supported_version,
-                                                body_text = body_text))
-            else:
-                new_oots.append(Outoftreemodule(name = oot_name,
-                                                tags = 'None',
-                                                description = 'None',
-                                                repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest
-                                                last_commit = commit_date,
-                                                author = 'None',
-                                                dependencies = 'None',
-                                                copyright_owner = 'None',
-                                                icon = validate_icon_URL(''),
-                                                website = 'None',
-                                                gr_supported_version = '',
-                                                body_text = body_text))
-        except yaml.YAMLError:
-            print("   ", giturl, "had error parsing MANIFEST yaml")
+                logging.warn(f"Failed to extract latest commit from response for {giturl}")
+                raise e
         except Exception as e:
-            print(e)
-
+            logging.warn(f"Failed to get latest commit:\n{e}\nSetting None")
+            commit_date = None
+        oot_name = giturl.split('/')[1].replace('-','‑') # people kept giving their stuff long titles, it worked out better to just use their github project url. also, i replace the standard hyphen with a non-line-breaking hyphen =)
+        if oot_name == '' or oot_name is None:
+            print("OOT Name was blank or didnt have a / in it")
+            continue
+        if processed_yaml:  # if the MANIFEST file existed
+            supported_version = processed_yaml.get('gr_supported_version', '')
+            if isinstance(supported_version, list):
+                supported_version = [str(x) for x in supported_version]
+                supported_version = ','.join(supported_version)
+            deps = processed_yaml.get('dependencies', ['None'])
+            if deps:
+                if isinstance(deps, list):
+                    deps = ", ".join(deps)
+            else:
+                deps = 'None'
+            new_oots.append(Outoftreemodule(name = oot_name, 
+                                            tags = ", ".join(processed_yaml.get('tags',['None'])),
+                                            description = processed_yaml.get('brief', 'None'),
+                                            repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest
+                                            last_commit = commit_date,
+                                            author = ", ".join(processed_yaml.get('author', ['None'])),
+                                            dependencies = deps,
+                                            copyright_owner = ", ".join(processed_yaml.get('copyright_owner', ['None'])),
+                                            icon = validate_icon_URL(processed_yaml.get('icon', '')),
+                                            website = processed_yaml.get('website', 'None'),
+                                            gr_supported_version = supported_version,
+                                            body_text = body_text))
+        else:
+            new_oots.append(Outoftreemodule(name = oot_name,
+                                            tags = 'None',
+                                            description = 'None',
+                                            repo = 'https://github.com/' + giturl, # use repo from lwr instead of that provided in manifest
+                                            last_commit = commit_date,
+                                            author = 'None',
+                                            dependencies = 'None',
+                                            copyright_owner = 'None',
+                                            icon = validate_icon_URL(''),
+                                            website = 'None',
+                                            gr_supported_version = '',
+                                            body_text = body_text))
     # clear table
     Outoftreemodule.objects.all().delete()
     # all the new objects to db
     for new_oot in new_oots:
         new_oot.save() # adds to db
-
-
